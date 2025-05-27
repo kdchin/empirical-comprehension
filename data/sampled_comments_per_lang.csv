@@ -1,0 +1,3262 @@
+ext,proj_name,type,len,text,referencedLine
+cpp,godot,inline,1,"// Ensure that path comes third, even if there is no type.","path += ""::"";"
+cpp,bitcoin,block,2,"// Check transactions
+// Must check for duplicate inputs (see CVE-2018-17144)","for (const auto& tx : block.vtx) {
+        TxValidationState tx_state;
+        if (!CheckTransaction(*tx, tx_state)) {
+            // CheckBlock() does context-free validation checks. The only
+            // possible failures are consensus failures.
+            assert(tx_state.GetResult() == TxValidationResult::TX_CONSENSUS);
+            return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, tx_state.GetRejectReason(),
+                                 strprintf(""Transaction check failed (tx hash %s) %s"", tx->GetHash().ToString(), tx_state.GetDebugMessage()));
+        }
+    }"
+cpp,tensorflow,block,1,/*buffer_allocations=*/,nullptr )
+cpp,terminal,block,11,"// The _cached members store characters in `target`'s encoding that didn't fit into
+// the client's buffer. So, if slice.empty() == false, then we'll store `slice` there.
+//
+// But it would be incorrect to test for slice.empty() == false, because the exit
+// condition is actually ""if the target has no space left"" and that's subtly different.
+// This difference can be seen when `source` contains ""abc"" and `target` is 1 character large.
+// Testing for `target.empty() will ensure we:
+// * exit right after copying ""a""
+// * don't store anything in `_cachedTextA`
+// * leave ""bc"" in the `source` string, for the caller to handle
+// Otherwise we'll copy ""a"", store ""b"" and return ""c"", which is wrong. See GH#16223.","if (target.empty())
+                {
+                    if (!slice.empty())
+                    {
+                        _cachedTextA = slice;
+                        _cachedTextReaderA = _cachedTextA;
+                    }
+                    break;
+                }"
+cpp,grpc,singleton,1,// first event case,"if (head_trace_ == nullptr) {
+    head_trace_ = tail_trace_ = new_trace_event;
+  } else {
+    // regular event add case
+    tail_trace_->set_next(new_trace_event);
+    tail_trace_ = tail_trace_->next();
+  }"
+cpp,bitcoin,block,10,"// Also store the hash of the block with the highest height of
+// all the blocks which have sequence locked prevouts.
+// This hash needs to still be on the chain
+// for these LockPoint calculations to be valid
+// Note: It is impossible to correctly calculate a maxInputBlock
+// if any of the sequence locked inputs depend on unconfirmed txs,
+// except in the special case where the relative lock time/height
+// is 0, which is equivalent to no sequence lock. Since we assume
+// input height of tip+1 for mempool txs and test the resulting
+// min_height and min_time from CalculateSequenceLocks against tip+1.",int max_input_height{0};
+cpp,godot,block,1,"/* memcmp/UnicodeString style, both length-specified */",int32_t lengthResult;
+cpp,opencv,singleton,1,"// For 2x2 grid, 3x3 grid and 4x4 grid",const int pattern_size = options_->descriptor_pattern_size;
+cpp,bitcoin,singleton,1,// during reorgs to ensure COINBASE_MATURITY is still met.,bool fSpendsCoinbase = false;
+cpp,imgui,block,2,"// Keep up at the bottom of the scroll region if we were already at the bottom at the beginning of the frame.
+// Using a scrollbar or mouse-wheel will take away from the bottom edge.","if (AutoScroll && ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+                ImGui::SetScrollHereY(1.0f);"
+cpp,godot,block,2,"// could be made available here but probably obsolete with use of modern
+// memory leak checker tools",#define _dbgct(me)
+cpp,tensorflow,singleton,1,// Parse delegate options,"const std::vector<std::string> options =
+        SplitString(params.Get<std::string>(""external_delegate_options""), ';');"
+cpp,tensorflow,singleton,1,// its size. Might as well populate it with -1.,input_shape.push_back(ShapedType::kDynamic);
+cpp,godot,singleton,1,// This is the best we can do unfortunately.,return Input::get_singleton()->get_mouse_position();
+cpp,godot,inline,1,// PHYSICS_2D_DISABLED,"#ifndef PHYSICS_2D_DISABLED
+			// Physics quadrants are drawn from their origin.
+			Vector2i physics_quadrant_origin = _coords_to_quadrant_coords(cell_data.coords, physics_quadrant_size) * physics_quadrant_size;
+			quadrants_to_updates.insert(_coords_to_quadrant_coords(physics_quadrant_origin, TILE_MAP_DEBUG_QUADRANT_SIZE));
+#endif"
+cpp,tensorflow,singleton,1,// Initializes the output tensor and out_count with 0.,out_mat.setZero();
+cpp,tensorflow,block,3,"// CollectivePermuteStart produces a tuple of
+// {aliased operand, destination buffer, contexts}, where the context
+// data are optional.",define_value_at(/*index=*/{});
+cpp,opencv,block,2,"// An intermediate matrix, the inverse of what is called ""H"" in the paper
+// (see eq. 25)","Mat H = Mat::zeros(3, 3, CV_64F);"
+cpp,tensorflow,block,3,"// vector, which will be fed to the ExecutionOutput, which will use
+// the indices to drop the addresses from its own ScopedShapedBuffer
+// result, if the ExecutionOutput is not committed.",result.AddAliasedIndex(index);
+cpp,opencv,inline,1,// check if we succeeded,(!cap.isOpened())
+cpp,godot,inline,1,// [y][x],vec4F block_pixels[BLOCK_H][BLOCK_W];
+cpp,tensorflow,singleton,1,// Compute padding.,const RuntimeShape& filter_shape = GetTensorShape(filter);
+cpp,tensorflow,singleton,1,// Update the reachability graph.,"UpdateReachability(fusion, fused, all_fusion_candidates_,
+                     [this](HloInstruction* instr) { return is_fused(instr); });"
+cpp,bitcoin,inline,1,// 1 method identifier follows...,vSocks5Init.push_back(0x01);
+cpp,tensorflow,singleton,1,// Currently unrolled loop does not support this optimization.,"if (!loop.windowed_in_contracting_dims &&
+        !loop.operands_sharded_at_contracting_dims) {
+      // We have a dynamic-update-slice for the output in
+      // batch/non-contracting-dim windowed dot-general. So moving reduce ops
+      // into the loop could help reduce memory.
+      TF_RETURN_IF_ERROR(
+          MoveUsersIntoWindowedDotGeneralLoopOnNonContractingDimensions(
+              loop.while_loop, options));
+    }"
+cpp,opencv,inline,1,// end of while loop,"while (is_best_model_updated) {
+            is_best_model_updated = false;
+
+            // Build graph problem. Apply graph cut to G
+            int labeling_inliers_size = labeling(new_model);
+            for (int iter = 0; iter < lo_inner_iterations; iter++) {
+                // sample to generate min (|I_7m|, |I|)
+                int num_of_estimated_models;
+                if (labeling_inliers_size > gc_sample_size) {
+                    // generate random subset in range <0; |I|>
+                    num_of_estimated_models = estimator->estimateModelNonMinimalSample
+                            (lo_sampler->generateUniqueRandomSubset(labeling_inliers,
+                                   labeling_inliers_size), gc_sample_size, gc_models, weights);
+                } else {
+                    if (iter > 0) break; // break inliers are not updated
+                    num_of_estimated_models = estimator->estimateModelNonMinimalSample
+                            (labeling_inliers, labeling_inliers_size, gc_models, weights);
+                }
+                for (int model_idx = 0; model_idx < num_of_estimated_models; model_idx++) {
+                    const Score gc_temp_score = quality->getScore(gc_models[model_idx]);
+                    // store the best model from estimated models
+                    if (gc_temp_score.isBetter(new_model_score)) {
+                        is_best_model_updated = true;
+                        new_model_score = gc_temp_score;
+                        gc_models[model_idx].copyTo(new_model);
+                    }
+                }
+
+                if (termination != nullptr && is_best_model_updated && current_ransac_iter > termination->update(best_model, best_model_score.inlier_number)) {
+                    is_best_model_updated = false; // to break outer loop
+                }
+
+            } // end of inner GC local optimization
+        }"
+cpp,tensorflow,block,8,"// don't.
+//
+// NOTE: If a dimension has size 1, we group it as the current
+// run so that we can minimize the number of runs.
+//
+// E.g., when we want to reduce a tensor of shape [2, 1, 3, 1,
+// 5] by axes = [1, 4], we should treat the tensor as a [6, 5]
+// and reduce by axes = [1] (i.e., the output is shape [6]).",reduce_first_axis_ = bitmap[dim_index];
+cpp,opencv,singleton,1,// Check if the input is an image,"if (input.find("".jpg"") != String::npos || input.find("".png"") != String::npos)
+        {
+            img = imread(findFile(input));
+            if (img.empty())
+            {
+                CV_Error(Error::StsError, ""Cannot read image file: "" + input);
+            }
+            isImage = true;
+        }
+        else
+        {
+            cap.open(input);
+            if (!cap.isOpened())
+            {
+                CV_Error(Error::StsError, ""Cannot open video "" + input);
+            }
+            isCamera = true;
+        }"
+cpp,bitcoin,block,4,"// If number of conflict confirms cannot be determined, this means
+// that the block is still unknown or not yet part of the main chain,
+// for example when loading the wallet during a reindex. Do nothing in that
+// case.","if (m_last_block_processed_height < 0 || conflicting_height < 0) {
+        return;
+    }"
+cpp,tensorflow,block,1,/*mask_invalid_region=*/,"needs_masking ,"
+cpp,tensorflow,inline,1,// stride planes,","
+cpp,godot,block,2,"// Character is starting a new line.  Bump up the line number, and
+//  reset the column to 0.",fLineNum++;
+cpp,godot,singleton,1,// Add a comment to describe the shader origin (useful when converting to ShaderMaterial).,"String code = vformat(
+			""// NOTE: Shader automatically converted from "" GODOT_VERSION_NAME "" "" GODOT_VERSION_FULL_CONFIG ""'s %s.\n\n"",
+			orm ? ""ORMMaterial3D"" : ""StandardMaterial3D"");"
+cpp,tensorflow,singleton,1,// The node represents `tf.shape(tensor)`.,InferenceContext* c = refiner.GetContext(&node);
+cpp,tensorflow,singleton,1,// narrower significand to the wider significand.,"int64_t to_highest = llvm::APFloat::getLargest(to_ty.getFloatSemantics())
+                             .bitcastToAPInt()
+                             .getZExtValue();"
+cpp,godot,singleton,1,"//if ((_floatExact(val, 2.2250738585072011f)) && ((minus_e * static_cast<int>(exponentPart)) <= -308)) {","if ((_floatExact(val, 1.175494351f)) && ((minus_e * static_cast<int>(exponentPart)) <= -38)) {
+            //val *= 1.0e-308f;
+            val *= 1.0e-38f;
+            a = iter;
+            goto success;
+        }"
+cpp,tensorflow,singleton,1,// Each TF attribute is represented as a pair of name and value strings.,std::string name = attrs.GetStringAttribute(i * 2).str();
+cpp,tensorflow,singleton,1,// the start of each list's dims.,std::unique_ptr<const int64_t*[]> dims(new const int64_t*[num_values]);
+cpp,tensorflow,block,3,"// where C1 and C2 are constants and X is non-constant.
+//
+// TODO(rmlarsen): Use PrepareConstantPushDown() to simplify this code.",if (!IsAnyMul(*node) || NumNonControlInputs(*node) != 2) return false;
+cpp,godot,inline,1,// JPH_EXTERNAL_PROFILE || JPH_PROFILE_ENABLED,"#if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
+		// Set the name of the layer
+		mLayers[l].SetName(inLayerInterface.GetBroadPhaseLayerName(BroadPhaseLayer(BroadPhaseLayer::Type(l))));
+#endif"
+cpp,opencv,singleton,1,// repeated string stage = 4;,"case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            auto str = _internal_add_stage();
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+            #ifndef NDEBUG
+            ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, ""opencv_caffe.NetStateRule.stage"");
+            #endif  // !NDEBUG
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else
+          goto handle_unusual;
+        continue;"
+cpp,godot,singleton,1,// Update the action's per-device state.,ActionState::DeviceState &device_state = action_state.device_states[device_id];
+cpp,tensorflow,block,2,"// TODO(b/139809335): This does not properly clean up remote resources
+// Clean up the previous step container and create a new one.","step_container_ = std::make_unique<ScopedStepContainer>(
+        0, [this](const string& name) { ClearResourceContainer(name); });"
+cpp,grpc,singleton,1,// since we may need to notify the LB policy about trailing metadata.,"if (batch->recv_trailing_metadata) {
+    recv_trailing_metadata_ =
+        batch->payload->recv_trailing_metadata.recv_trailing_metadata;
+    transport_stream_stats_ =
+        batch->payload->recv_trailing_metadata.collect_stats;
+    original_recv_trailing_metadata_ready_ =
+        batch->payload->recv_trailing_metadata.recv_trailing_metadata_ready;
+    GRPC_CLOSURE_INIT(&recv_trailing_metadata_ready_, RecvTrailingMetadataReady,
+                      this, nullptr);
+    batch->payload->recv_trailing_metadata.recv_trailing_metadata_ready =
+        &recv_trailing_metadata_ready_;
+  }"
+cpp,godot,block,4,"// printf(""Live names\n"");
+// for (TNameToIndex::const_iterator it = nameToIndex.begin(); it != nameToIndex.end(); ++it)
+//    printf(""%s: %d\n"", it->first.c_str(), it->second);
+// printf(""\n"");",}
+cpp,godot,inline,1,/*version*/,int
+cpp,godot,inline,1,// make sure interval_timer globals are initialized from main thread to avoid TSAN reports,interval_timer::init();
+cpp,godot,block,6,"// Find the state table element that matches the input char from the rule, or the
+//    class of the input character.  Start with the first table row for this
+//    state, then linearly scan forward until we find a row that matches the
+//    character.  The last row for each state always matches all characters, so
+//    the search will stop there, if not before.
+//",tableEl = &gRuleParseStateTable[state];
+cpp,grpc,singleton,1,// cancel out streams that will never be started,"if (t->next_stream_id >= MAX_CLIENT_STREAM_ID) {
+    while (grpc_chttp2_list_pop_waiting_for_concurrency(t, &s)) {
+      s->trailing_metadata_buffer.Set(
+          grpc_core::GrpcStreamNetworkState(),
+          grpc_core::GrpcStreamNetworkState::kNotSentOnWire);
+      grpc_chttp2_cancel_stream(
+          t, s,
+          grpc_error_set_int(GRPC_ERROR_CREATE(""Stream IDs exhausted""),
+                             grpc_core::StatusIntProperty::kRpcStatus,
+                             GRPC_STATUS_UNAVAILABLE),
+          false);
+    }
+  }"
+cpp,opencv,inline,1,// i_t (*) g_t,"multiply(gateI, gateG, gateI);"
+cpp,godot,singleton,1,// Forcing new temporaries guarantees forward progress.,"if (res.second)
+		force_recompile_guarantee_forward_progress();
+	else
+		force_recompile();"
+cpp,tensorflow,block,9,"//   elements within the windows: 0th window goes to N-1st spot, 1st window
+//   goes to N-2nd spot etc.
+//
+// For the running example, the result will be:
+//   [[[5, 6], [3, 4], [1, 2]], [[11, 12], [9, 10], [7, 8]]].
+//
+// Note how elements within windows haven't changed their order with respect
+// to each other and how blocks haven't changed their order with respect to
+// each other.",int64_t numWindows = type.getDimSize(dim);
+cpp,tensorflow,inline,1,// GOOGLE_CUDA || TENSORFLOW_USE_ROCM,"#if (defined(GOOGLE_CUDA) && GOOGLE_CUDA) || \
+    (defined(TENSORFLOW_USE_ROCM) && TENSORFLOW_USE_ROCM)
+  mutex_lock lock(mu_);
+  CHECK(gpu_allocators_.empty())  // Crash OK
+      << ""AddGPUAllocVisitor must be called before ""
+         ""first call to GetGPUAllocator."";
+  DCHECK_GE(bus_id, 0);
+  while (bus_id >= static_cast<int64_t>(gpu_visitors_.size())) {
+    gpu_visitors_.push_back(std::vector<SubAllocator::Visitor>());
+  }
+  gpu_visitors_[bus_id].push_back(visitor);
+#endif"
+cpp,tesseract,singleton,1,// Convert to unicodes.,std::vector<char32> unicodes = UNICHAR::UTF8ToUTF32(get_normed_unichar(id));
+cpp,godot,singleton,1,"// If a script is attached, get methods from it.",ScriptInstance *si = target->get_script_instance();
+cpp,godot,inline,1,// Define a very small minimum window size to prevent bugs such as GH-37242.,"root->set_min_size(Size2i(64, 64));"
+cpp,godot,block,1,/* Very bad name used. */,return nullptr;
+cpp,godot,block,3,"// The new process
+// Create a new session-ID so parent won't wait for it.
+// This ensures the process won't go zombie at the end.",setsid();
+cpp,tensorflow,singleton,1,// use of DTensor.,"static const char* env_str = (std::getenv(""DTENSOR_ENABLE_REUSE_GROUP_KEY""));"
+cpp,tensorflow,singleton,1,// to reduce as a constant node.,SmallVector<int> elements(input_shape.getRank());
+cpp,godot,singleton,1,// input order,"while (input_cursor < vertex_count)
+	{
+		if (live_triangles[input_cursor] > 0)
+			return input_cursor;
+
+		++input_cursor;
+	}"
+cpp,godot,inline,1,// child of source (below a technique tag),{
+cpp,tensorflow,block,7,"//  Cast|Const: 1/sqrt(2)    Cast|Const: 1
+//                  \               \
+  //  * --> BiasAdd --> Mul --> Erf --> Add|AddV2 --> Mul
+//      /         \                                 /
+// MatMul           ----------------------------> Mul
+//                                                /
+//                                  Cast|Const: 1/2","static utils::OpTypePattern* gelu_exact_pattern3 = new utils::OpTypePattern
+    {""Mul"", ""output"", NodeStatus::kReplace,
+      {
+        {""Add|AddV2"", ""erf_plus_one"", NodeStatus::kRemove,
+          {
+            {""Erf"", ""erf"", NodeStatus::kRemove,
+              {
+                {""Mul"", ""bias_add_x_sqrt_one_half"", NodeStatus::kRemove,
+                  {
+                    {""BiasAdd"", ""bias_add"", NodeStatus::kRemove},
+                    {""Cast|Const"", ""sqrt_one_half"", NodeStatus::kRemain}
+                  }
+                }  // Mul: ""bias_add_x_sqrt_one_half""
+              }
+            },  // Erf: ""erf""
+            {""Cast|Const"", ""one"", NodeStatus::kRemain}
+          }
+        },  // Add|AddV2: ""erf_plus_one""
+        {""Mul"", ""erf_plus_one_times_one_half"", NodeStatus::kRemove,
+          {
+            {""BiasAdd"", ""bias_add"", NodeStatus::kRemove,
+              {
+                {""MatMul"", ""matmul"", NodeStatus::kRemove},
+                {""*"", ""bias"", NodeStatus::kRemain}
+              }
+            },  // BiasAdd: ""bias_add""
+            {""Cast|Const"", ""one_half"", NodeStatus::kRemain}
+          }
+        }  // Mul: ""erf_plus_one_times_one_half""
+      }
+    };"
+cpp,tensorflow,block,1,/*user_index=*/,value.defining_index() )
+cpp,tensorflow,block,1,/*required_outputs=*/,1 )
+cpp,godot,singleton,1,"// It's likely accessed in a branch, so assume we must preserve.",return true;
+cpp,opencv,inline,1,// ADDRESS_SANITIZER,"#ifdef ADDRESS_SANITIZER
+  ASAN_POISON_MEMORY_REGION(ptr_, limit_ - ptr_);
+#endif"
+cpp,opencv,block,3,"//  nx*nx*N*Cxx + 2nx*ny*N*Cxy + ny*ny*N*Cyy
+// sum of squared errors","if (err)
+        *err = nx*nx*N*Cxx + 2*nx*ny*N*Cxy + ny*ny*N*Cyy;"
+cpp,tensorflow,singleton,1,// Retrieve related function information.,const std::string& function_name = bare_cf.concrete_function_name();
+cpp,tensorflow,block,1,/*padding=*/,DenseIntElementsAttr(nullptr) )
+cpp,godot,singleton,1,"//Correction of out-of-range radii, see F6.6.2 (step 4)","if (lambda > 1.0f) {
+        //See F6.6.3
+        float lambdaRoot = sqrtf(lambda);
+
+        rx *= lambdaRoot;
+        ry *= lambdaRoot;
+        //Update rx2 and ry2
+        rx2 = rx * rx;
+        ry2 = ry * ry;
+    }"
+cpp,tensorflow,block,3,"// We also need constant begin/end indices and strides to perform padding
+// calculations.
+// Bounded shape after performing strided slice","SmallVector<int64_t, 4> shape;"
+cpp,opencv,singleton,1,// (re) allocated scaled image,"if( image_widget->flags & CV_WINDOW_NO_IMAGE ){
+          cvImageWidget_set_size( widget, image_widget->original_image->cols,
+                                          image_widget->original_image->rows);
+      }
+      else{
+          cvImageWidget_set_size( widget, allocation->width, allocation->height );
+      }"
+cpp,tensorflow,block,1,/*host_memory_allocator=*/,"std::move(info->host_memory_allocator) ,"
+cpp,tensorflow,singleton,1,// OK also falls here.,return false;
+cpp,opencv,singleton,1,"// post process, create last node correctly.","if (isLast && ld.backendNodes[DNN_BACKEND_TIMVX])
+        {
+            auto tmpNode = ld.backendNodes[DNN_BACKEND_TIMVX].dynamicCast<TimVXBackendNode>();
+            tmpNode->isLast = true;
+            // update graphConflictMap
+            tvUpdateConfictMap(graphIndex, ld, timVxInfo.graphConflictMap);
+        }"
+cpp,tesseract,inline,1,// from this,const BLOCK &source
+cpp,tensorflow,inline,1,/*num_upper_diags=*/,","
+cpp,godot,singleton,1,// Test if we want to accept this hit,"if (mValidateBodyPair)
+					{
+						switch (mSystem->mContactManager.ValidateContactPoint(*mBody1, *mBody2, mBody1->GetCenterOfMassPosition(), inResult))
+						{
+						case ValidateResult::AcceptContact:
+							// We're just accepting this one, nothing to do
+							break;
+
+						case ValidateResult::AcceptAllContactsForThisBodyPair:
+							// Accept and stop calling the validate callback
+							mValidateBodyPair = false;
+							break;
+
+						case ValidateResult::RejectContact:
+							// Skip this contact
+							return;
+
+						case ValidateResult::RejectAllContactsForThisBodyPair:
+							// Skip this and early out
+							ForceEarlyOut();
+							return;
+						}
+					}"
+cpp,godot,inline,1,// No config.,return;
+cpp,tensorflow,singleton,1,// Handle dynamic input shapes.,"if (!dynamic_input_size_indices.empty()) {
+    TF_RETURN_IF_ERROR(HandleDynamicStridedSliceInput(
+        &*builder, *slice, *strided_slice_spec, dynamic_input_size_indices,
+        begin_dims->AsTrtDims(), stride_dims->AsTrtDims(),
+        end_dims->AsTrtDims()));
+  }"
+cpp,bitcoin,block,4,"// Must have at least two matches since we want to merge across
+// files. But what if we have a single file that contains many
+// overwrites and deletions?  Should we have another mechanism for
+// finding such files?","if (state.matches >= 2) {
+    // 1MB cost is about 1 seek (see comment in Builder::Apply).
+    return UpdateStats(state.stats);
+  }"
+cpp,x64dbg,inline,1,//initialize,(!disasm || !basicinfo)
+cpp,bitcoin,block,2,"// chain tip, so we use that to calculate the median time passed to
+// IsFinalTx().",const int64_t nBlockTime{active_chain_tip.GetMedianTimePast()};
+cpp,terminal,block,6,"// Search box is in Visible visibility state by default. This is to make
+// sure DesiredSize() returns the correct size for the search box.
+// (DesiredSize() seems to report a size of 0,0 until the control is
+// visible for the first time, i.e not in Collapsed state).
+// Here, we set the search box to ""Closed"" state (and hence Collapsed
+// visibility) after we've updated the size-dependent properties.","VisualStateManager::GoToState(*this, L""Closed"", false);"
+cpp,tensorflow,block,3,"// Here we will try to parse the input tensor handle to see if it
+// contains a valid TF lite resource ID. If not, then we know that the
+// input is a TF resource tensor.","tensorflow::ResourceHandle handle =
+            tf_tensor.flat<tensorflow::ResourceHandle>()(0);"
+cpp,godot,singleton,1,// Check if we should cleanup everything.,bool forced_cleanup = p_force_cleanup || !enabled || !is_inside_tree() || tile_set.is_null();
+cpp,tensorflow,singleton,1,// `current_element_iterator_` is propagated,ctx->MergeCheckpoint(nested_ctx.checkpoint());
+cpp,tensorflow,singleton,1,// This is the directory marker object. Delete it.,"return DeleteFile(MaybeAppendSlash(dirname), token);"
+cpp,godot,singleton,1,// Add missing connections.,"if (GLOBAL_GET(""debug/gdscript/warnings/enable"")) {
+		Node *base = get_tree()->get_edited_scene_root();
+		if (base && missing_connections.size() > 0) {
+			has_connections_table = true;
+			warnings_panel->push_table(1);
+			for (const Connection &connection : missing_connections) {
+				String base_path = base->get_name();
+				String source_path = base == connection.signal.get_object() ? base_path : base_path + ""/"" + base->get_path_to(Object::cast_to<Node>(connection.signal.get_object()));
+				String target_path = base == connection.callable.get_object() ? base_path : base_path + ""/"" + base->get_path_to(Object::cast_to<Node>(connection.callable.get_object()));
+
+				warnings_panel->push_cell();
+				warnings_panel->push_color(warnings_panel->get_theme_color(SNAME(""warning_color""), EditorStringName(Editor)));
+				warnings_panel->add_text(vformat(TTR(""Missing connected method '%s' for signal '%s' from node '%s' to node '%s'.""), connection.callable.get_method(), connection.signal.get_name(), source_path, target_path));
+				warnings_panel->pop(); // Color.
+				warnings_panel->pop(); // Cell.
+			}
+			warnings_panel->pop(); // Table.
+
+			warning_nb += missing_connections.size();
+		}
+	}"
+cpp,opencv,block,2,"// operations (seekg() can be fairly expensive).
+//","streamData->currentPosition = tileOffset + 4 * Xdr::size<int>() +
+                                  3 * Xdr::size<Int64>()            +
+                                  tableSize                         +
+                                  dataSize;"
+cpp,tensorflow,singleton,1,// Step 2),llvm::DenseSet<llvm::StringRef> used_dimensions;
+cpp,tensorflow,singleton,1,"// cases, so restrictions here are conservative to these.","if (minBitWidth <= 8 && config.num_warps > 8) {
+    config.block_m = std::max(config.block_m, 32);
+  }"
+cpp,godot,inline,1,// B,write_buffer[index + 2] = static_cast<uint8_t>(f2);
+cpp,tensorflow,block,1,/*mem_size=*/,ShapeUtil::ByteSizeOf(shape) )
+cpp,tensorflow,block,1,/*aux_input=*/,"nullptr ,"
+cpp,tensorflow,block,1,/*bias=*/,"*new_bias.getOutput().begin() ,"
+cpp,terminal,singleton,1,// Insert the reason and the URI,CouldNotOpenUriReason().Text(reason);
+cpp,grpc,block,2,"// If the connection was aborted, the callback was already called when
+// the deadline was met.","grpc_core::ExecCtx::Run(DEBUG_LOCATION, on_done, error);"
+cpp,tensorflow,block,1,/*deserialize_xla_call_module=*/,"false , *function_aliases )"
+java,elasticsearch,singleton,1,"// now we should have field name, check and copy fields over to the suggestion builder we return","if (fieldname == null) {
+            throw new ParsingException(parser.getTokenLocation(), ""the required field option is missing"");
+        }"
+java,elasticsearch,block,2,"// When doing an operation across all indices, most of the time is spent on actually going to all shards and
+// do the required operations, the bottleneck isn't resolving expressions into concrete indices.",String[] visibleIndicesArray = visibleIndices.toArray(String[]::new);
+java,beam,block,3,"// The delegate may have pushed back unprocessed elements across multiple keys and windows.
+// Since processing is single-threaded per key and window, we don't need to regroup the
+// outputs, but just make a bunch of singletons","for (WindowedValue<?> untypedUnprocessed : delegateResult.getUnprocessedElements()) {
+        WindowedValue<KV<K, InputT>> windowedKv = (WindowedValue<KV<K, InputT>>) untypedUnprocessed;
+        WindowedValue<KeyedWorkItem<K, KV<K, InputT>>> pushedBack =
+            windowedKv.withValue(
+                KeyedWorkItems.elementsWorkItem(
+                    windowedKv.getValue().getKey(), Collections.singleton(windowedKv)));
+
+        regroupedResult.addUnprocessedElements(pushedBack);
+      }"
+java,ignite,block,2,"// No-op.
+// Disconnect is handled from PlatformProcessor.onDisconnected.",}
+java,ignite,singleton,1,// Batch was stolen by the main stream.,"if (!sharedBatchesSet.remove(batch))
+                    return null;"
+java,ignite,singleton,1,// Update the byte with the alignedBits.,bytes[byteIndex] |= (byte)alignedBits;
+java,cassandra,singleton,1,// Short circuit equal case,"if (buffer1 == buffer2 && offset1 == offset2 && length1 == length2)
+                return 0;"
+java,cassandra,inline,1,// algorithm,","
+java,dubbo,singleton,1,// do nothing by default,}
+java,elasticsearch,singleton,1,// concatenating deterministic automata should result in a deterministic automaton. No need to determinize here.,assert a.isDeterministic();
+java,elasticsearch,singleton,1,// cannot make sense of this file url,return null;
+java,kafka,block,2,"// This is an incremental snapshot,
+// so we need to apply it to our current soft state.","shareStateMap.compute(mapKey, (k, v) -> v == null ? offsetRecord : merge(v, value));"
+java,beam,singleton,1,"// finished, this is the end of the iteration.",isDone = true;
+java,spark,singleton,1,// Full hash code matches.  Let's compare the keys for equality.,"loc.with(pos, hash, true);"
+java,elasticsearch,singleton,1,"// that run on shards run in the threadpool, indices should be effectively closed by now.","if (nodeService.awaitClose(0, TimeUnit.MILLISECONDS) == false) {
+                throw new IllegalStateException(
+                    ""Some shards are still open after the threadpool terminated. ""
+                        + ""Something is leaking index readers or store references.""
+                );
+            }"
+java,spark,block,3,"// Java String's split method supports ""ignore empty string"" behavior when the limit is 0
+// whereas other languages do not. To avoid this java specific behavior, we fall back to
+// -1 when the limit is 0.","if (limit == 0) {
+      limit = -1;
+    }"
+java,elasticsearch,singleton,1,// index,"for (Map.Entry<String, CompletionInputMetadataContainer> completionInput : inputMap.entrySet()) {
+            String input = completionInput.getKey();
+            if (input.trim().isEmpty()) {
+                context.addIgnoredField(mappedFieldType.name());
+                continue;
+            }
+            // truncate input
+            if (input.length() > maxInputLength) {
+                int len = maxInputLength;
+                if (Character.isHighSurrogate(input.charAt(len - 1))) {
+                    assert input.length() >= len + 1 && Character.isLowSurrogate(input.charAt(len));
+                    len += 1;
+                }
+                input = input.substring(0, len);
+            }
+            CompletionInputMetadataContainer cmc = completionInput.getValue();
+            if (fieldType().hasContextMappings()) {
+                for (CompletionInputMetadata metadata : cmc.getValues()) {
+                    fieldType().getContextMappings().addField(context.doc(), fieldType().name(), input, metadata.weight, metadata.contexts);
+                }
+            } else {
+                context.doc().add(new SuggestField(fieldType().name(), input, cmc.getWeight()));
+            }
+        }"
+java,hadoop,inline,1,// Store or Update operation,{
+java,elasticsearch,singleton,1,// move to a step with an invalid request,"Request moveToStepRequest = new Request(""POST"", ""_ilm/move/"" + index);"
+java,dubbo,singleton,1,"// exactly one centroid, should have max==min",double width = max - min;
+java,ignite,inline,1,// New reinit task scheduled or channel is closed.,"if (closed || (startChannelsReInit > finishChannelsReInit))
+                        return;"
+java,elasticsearch,singleton,1,// Trigger system index creation,"leaderClient().prepareIndex(FakeSystemIndex.SYSTEM_INDEX_NAME).setSource(Map.of(""a"", ""b"")).get();"
+java,hadoop,singleton,1,// create scratch directory(output directory of gridmix),final FileSystem scratchFs = scratchDir.getFileSystem(conf);
+java,kafka,singleton,1,// This means we're using the CLASSIC consumer group protocol.,"consumerProps.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, res.getString(""assignmentStrategy""));"
+java,elasticsearch,singleton,1,"// Expressions like (a){0,3} match empty string or up to 3 a's.",result = new MatchAllDocsQuery();
+java,elasticsearch,block,2,"// value source will be null for unmapped fields
+// Important: use `rounding` here, not `shardRounding`","InternalDateHistogram.EmptyBucketInfo emptyBucketInfo = minDocCount == 0
+                    ? new InternalDateHistogram.EmptyBucketInfo(rounding.withoutOffset(), buildEmptySubAggregations(), extendedBounds)
+                    : null;"
+java,ignite,block,1,/*op*/,1
+java,elasticsearch,singleton,1,"// If we reached this point, all of the buffered ops should have been flushed successfully.",assert buffer == null;
+java,spark,block,2,"// It only gets here when the key is not present in the map. The first time the merge
+// manager receives a pushed block for a given application shuffle partition.","File dataFile =
+        appShuffleInfo.getMergedShuffleDataFile(shuffleId, shuffleMergeId, reduceId);"
+java,hadoop,singleton,1,// Return reference to the directory object.,"return updateFileStatusPath(meta, absolutePath);"
+java,elasticsearch,block,6,"/*
+         * Here we use threadPool::absoluteTimeInMillis rather than System::currentTimeInMillis because snapshot start time is set using
+         * ThreadPool.absoluteTimeInMillis(). ThreadPool.absoluteTimeInMillis() returns a cached time that can be several hundred
+         * milliseconds behind System.currentTimeMillis(). The result is that a snapshot taken after a policy is created can have a start
+         * time that is before the policy's (or action's) start time if System::currentTimeInMillis is used here.
+         */",LongSupplier nowSupplier = services.threadPool()::absoluteTimeInMillis;
+java,beam,block,2,"// TODO(yaml): Consider allowing the full java schema naming syntax
+// (perhaps as a different dialect/language).",boolean append = configuration.getAppend() != null && configuration.getAppend();
+java,spark,block,2,"// Http transport mode.
+// We set the thread local username, in ThriftHttpServlet.","if (cliService.getHiveConf().getVar(
+        ConfVars.HIVE_SERVER2_TRANSPORT_MODE).equalsIgnoreCase(""http"")) {
+      userName = SessionManager.getUserName();
+    }"
+java,elasticsearch,singleton,1,// rectangle is a point,"addFields(LatLonShape.createIndexableFields(name, r.getMinLat(), r.getMinLon()));"
+java,elasticsearch,block,9,"// to the IndicesStatsRequest and therefore only a partial view of the
+// write-index write-load is stored during rollover.
+// In this test we simulate the following scenario:
+// - The DataStream template is configured to have 2 shards and 1 replica
+// - There's an allocation rule to allocate the data stream nodes in 4 particular nodes
+// - We want to simulate two possible cases here:
+// - All the assigned nodes for shard 0 will fail to respond to the IndicesStatsRequest
+// - Only the shard 1 replica will respond successfully to the IndicesStatsRequest ensuring that we fall back in that case
+// (only if it's not co-located with some other shard copies)",final List<String> dataOnlyNodes = internalCluster().startDataOnlyNodes(4);
+java,kafka,singleton,1,"// if the KTableSource should not be materialized, stores will be null or empty","final KTableSource<K, V> tableSource = (KTableSource<K, V>) processorParameters.processorSupplier();"
+java,hadoop,block,4,"// server doesn't support a feature.
+// raised from a number of HTTP error codes -mostly from
+// third-party stores which only support a subset of AWS S3
+// operations.","policyMap.put(AWSUnsupportedFeatureException.class, fail);"
+java,ignite,singleton,1,// Notify distributed processes on node leave.,"for (Map.Entry<UUID, WalStateDistributedProcess> procEntry : procs.entrySet()) {
+                    WalStateDistributedProcess proc = procEntry.getValue();
+
+                    proc.onNodeLeft(nodeId);
+
+                    sendFinishMessageIfNeeded(proc);
+                }"
+java,cassandra,inline,1,// throwOnOverload = false,else
+java,elasticsearch,singleton,1,"// postings hl doesn't support require_field_match, its field needs to be queried directly",". query (termQuery(""field-postings"", ""test""))"
+java,hadoop,singleton,1,"// For custom codec, we throw exception if the factory is not configured","String codecKey = ""io.erasurecode.codec."" + codec + "".coder"";"
+java,beam,singleton,1,// this means we will never see any more side input,emitAllPushbackValues();
+java,elasticsearch,singleton,1,"// If we reached this point, all of the buffered ops should have been flushed successfully.",assert buffer == null;
+java,ignite,singleton,1,// Avoid edge case of a single Node with non-null item.,Node<E> newNode = new Node<E>(null);
+java,hadoop,singleton,1,// on the synchronized lock before it entered this synchronized method,"LOG.info(
+            ""Skipping scheduling as the node "" + nodeID + "" has been removed"");"
+java,hadoop,singleton,1,// Update metrics,datanode.getMetrics().incrRamDiskBlocksEvicted();
+java,elasticsearch,block,3,"// * A relocation will retry the reroute phase.
+// * Allocation ids protect against spurious requests towards old allocations.
+// * We apply the cluster state on IndexShard instances before making it available for routing","assert state == IndexShardState.STARTED || state == IndexShardState.CLOSED : ""primary indexing unexpected in state ["" + state + ""]"";"
+java,ignite,singleton,1,// drStorages contains path with the DB and folderName.,File drStorage = ft.dataRegionStorages().get(drName);
+java,hadoop,block,2,"//Since rename is a non-atomic operation, after copy fails,
+// it is not allowed to delete the data of the original path.",return false;
+java,hadoop,singleton,1,// Map to record INodeReference to the referred id,ImmutableList<Long> refIdList = null;
+java,hadoop,block,4,"// Add the directory metadata to the list only if it's not already
+// there.  See earlier note, we prefer CloudBlobWrapper over
+// CloudDirectoryWrapper because it may have additional metadata (
+// properties and ACLs).","if (!metadataHashMap.containsKey(dirKey)) {
+
+              // Reached the targeted listing depth. Return metadata for the
+              // directory using default permissions.
+              //
+              // Note: Something smarter should be done about permissions. Maybe
+              // inherit the permissions of the first non-directory blob.
+              // Also, getting a proper value for last-modified is tricky.
+              //
+              FileMetadata directoryMetadata = new FileMetadata(dirKey,
+                  0,
+                  defaultPermissionNoBlobMetadata(),
+                  BlobMaterialization.Implicit,
+                  hadoopBlockSize);
+
+              // Add the directory metadata to the list.
+              metadataHashMap.put(dirKey, directoryMetadata);
+            }"
+java,spring-boot,singleton,1,// Most build systems will have copied the file to the class output location,"FileObject fileObject = this.environment.getFiler()
+			.getResource(StandardLocation.CLASS_OUTPUT, """", ADDITIONAL_METADATA_PATH);"
+java,cassandra,block,2,"// satisfy large allocations directly from JVM since they don't cause fragmentation
+// as badly, and fill up our regions quickly","Region region = new Region(MemoryUtil.allocate(size), size);"
+java,beam,singleton,1,// state will be immediately deleted.,"if (!isFinished) {
+                  paneInfoTracker.storeCurrentPaneInfo(directContext, pane);
+                }"
+java,elasticsearch,singleton,1,"// Else it's either explicitly enabled, or not defined in the settings so it is implicitly enabled.",}
+java,cassandra,singleton,1,"//CSA(foursA, twos, twos, twosA, twosB)","{
+         long u=twos^twosA;
+         foursA=(twos&twosA)|(u&twosB);
+         twos=u^twosB;
+       }"
+java,hadoop,block,10,"// The exists() check will push any pending rename operation forward,
+// if there is one, and return false.
+//
+// At this point, we have exclusive access to the source folder
+// via the lease, so we will not conflict with an active folder
+// rename operation.
+//
+// In the secure case, the call to exists will happen in the context
+// of the user that initiated the operation. In this case, we should
+// do the auth-check against ranger for the path.","if (!exists(parent)) {
+      try {
+
+        // This'll let the keep-alive thread exit as soon as it wakes up.
+        lease.free();
+      } catch (Exception e) {
+        LOG.warn(""Unable to free lease because: {}"", e.getMessage());
+      }
+      throw new FileNotFoundException(""Cannot create file "" +
+          f.getName() + "" because parent folder does not exist."");
+    }"
+java,hadoop,block,3,"// Checksum options are ignored by default. The file systems that
+// implement checksum need to override this method. The full
+// support is currently only available in DFS.","return create(f, permission, flags.contains(CreateFlag.OVERWRITE),
+        bufferSize, replication, blockSize, progress);"
+java,ignite,singleton,1,// Just allocate a new node page and add our data page there.,final long nextId = allocatePage(null);
+java,elasticsearch,singleton,1,"// Nothing to hash atm, so just use the action name",return Objects.hashCode(INSTANCE.name());
+java,ignite,inline,1,// Skip all candidates in case when no tx that owns lock.,(!owner)
+java,elasticsearch,singleton,1,// before refresh - document is only in translog,"assertGetFieldsAlwaysNull(indexOrAlias(), ""1"", fieldsList);"
+java,hadoop,singleton,1,// Check if name has already been registered,"if (metricsMap.containsKey(name)) {
+      throw new MetricsException(""Metric name ""+ name +"" already exists!"");
+    }"
+java,elasticsearch,block,3,"// to remove the in-memory structures for the index and not delete the
+// contents on disk because the index will later be re-imported as a
+// dangling index","assert indexMetadata != null || event.isNewCluster()
+                    : ""index ""
+                        + index
+                        + "" does not exist in the cluster state, it should either ""
+                        + ""have been deleted or the cluster must be new"";"
+java,hadoop,block,1,/* Should not be invoked by anyone. */,"throw new NotImplementedException(""Code is not implemented"");"
+java,elasticsearch,block,5,"/* at this point:
+             *  the query against the local cluster should be running because it's blocked
+             */
+// run the stop query",var stopRequest = new AsyncStopRequest(asyncExecutionId);
+java,spark,block,4,"// The map is already at MAX_CAPACITY and cannot grow. Instead, we prevent it from
+// accepting any more new elements to make sure we don't exceed the load factor. If we
+// need to spill later, this allows UnsafeKVExternalSorter to reuse the array for
+// sorting.",canGrowArray = false;
+java,elasticsearch,block,2,"// providing different numeric input with format should work, but bucket
+// keys are different now","assertNoFailuresAndResponse(
+            prepareSearch(indexName).setSize(0)
+                .addAggregation(
+                    dateRange(""date_range"").field(""date"").addRange(1000000, 3000000).addRange(3000000, 4000000).format(""epoch_millis"")
+                ),
+            response -> {
+                assertThat(response.getHits().getTotalHits().value(), equalTo(3L));
+                List<Range.Bucket> buckets = checkBuckets(response.getAggregations().get(""date_range""), ""date_range"", 2);
+                assertBucket(buckets.get(0), 2L, ""1000000-3000000"", 1000000L, 3000000L);
+                assertBucket(buckets.get(1), 1L, ""3000000-4000000"", 3000000L, 4000000L);
+            }
+        );"
+java,hadoop,singleton,1,// FileInfo available in cache.,HistoryFileInfo fileInfo = jobListCache.get(jobId);
+java,hadoop,block,8,"/*
+       * Previously here, we can allocate more than one container for each
+       * allocation under rootQ. Now this logic is not proper any more
+       * in global scheduling world.
+       *
+       * So here do not try to allocate more than one container for each
+       * allocation, let top scheduler make the decision.
+       */",break;
+java,elasticsearch,block,2,"// TODO we should use the effective subject realm here but need to handle the failed lookup scenario, in which the realm may be
+// `null`. Since this method is used in audit logging, this requires some care.","if (authentication.isFailedRunAs()) {
+                return authentication.getAuthenticatingSubject().getRealm().getName();
+            } else {
+                return authentication.getEffectiveSubject().getRealm().getName();
+            }"
+java,elasticsearch,singleton,1,"// loop until we've computed the next time, or we've past the endTime","while (gotOne == false) {
+
+            if (cl.getYear() > 2999) { // prevent endless loop...
+                return -1;
+            }
+
+            SortedSet<Integer> st = null;
+            int t = 0;
+
+            int sec = cl.getSecond();
+            int min = cl.getMinute();
+
+            // get second.................................................
+            st = seconds.tailSet(sec);
+            if (st != null && st.size() != 0) {
+                sec = st.first();
+            } else {
+                sec = seconds.first();
+                min++;
+                cl.setMinute(min);
+            }
+            cl.setSecond(sec);
+
+            min = cl.getMinute();
+            int hr = cl.getHour();
+            t = -1;
+
+            // get minute.................................................
+            st = minutes.tailSet(min);
+            if (st != null && st.size() != 0) {
+                t = min;
+                min = st.first();
+            } else {
+                min = minutes.first();
+                hr++;
+            }
+            if (min != t) {
+                cl.setSecond(0);
+                cl.setMinute(min);
+                cl.setHour(hr);
+                continue;
+            }
+            cl.setMinute(min);
+
+            hr = cl.getHour();
+            int day = cl.getDayOfMonth();
+            t = -1;
+
+            // get hour...................................................
+            st = hours.tailSet(hr);
+            if (st != null && st.size() != 0) {
+                t = hr;
+                hr = st.first();
+            } else {
+                hr = hours.first();
+                day++;
+            }
+            if (hr != t) {
+                cl.setSecond(0);
+                cl.setMinute(0);
+                cl.setDayOfMonth(day);
+                cl.setHour(hr);
+                continue;
+            }
+            cl.setHour(hr);
+
+            day = cl.getDayOfMonth();
+            int mon = cl.getMonth() + 1;
+            // '+ 1' because calendar is 0-based for this field, and we are
+            // 1-based
+            t = -1;
+            int tmon = mon;
+
+            // get day...................................................
+            boolean dayOfMSpec = daysOfMonth.contains(NO_SPEC) == false;
+            boolean dayOfWSpec = daysOfWeek.contains(NO_SPEC) == false;
+            if (dayOfMSpec && dayOfWSpec == false) { // get day by day of month rule
+                st = daysOfMonth.tailSet(day);
+                if (lastdayOfMonth) {
+                    if (nearestWeekday == false) {
+                        t = day;
+                        day = getLastDayOfMonth(mon, cl.getYear());
+                        day -= lastdayOffset;
+                        if (t > day) {
+                            mon++;
+                            if (mon > 12) {
+                                mon = 1;
+                                tmon = 3333; // ensure test of mon != tmon further below fails
+                                cl.plusYears(1);
+                            }
+                            day = 1;
+                        }
+                    } else {
+                        t = day;
+                        day = getLastDayOfMonth(mon, cl.getYear());
+                        day -= lastdayOffset;
+
+                        LocalDateTimeLegacyWrapper tcal = new LocalDateTimeLegacyWrapper(LocalDateTime.now(timeZone));
+                        tcal.setSecond(0);
+                        tcal.setMinute(0);
+                        tcal.setHour(0);
+                        tcal.setDayOfMonth(day);
+                        tcal.setMonth(mon - 1);
+                        tcal.setYear(cl.getYear());
+
+                        int ldom = getLastDayOfMonth(mon, cl.getYear());
+                        int dow = tcal.getDayOfWeek();
+
+                        if (dow == Calendar.SATURDAY && day == 1) {
+                            day += 2;
+                        } else if (dow == Calendar.SATURDAY) {
+                            day -= 1;
+                        } else if (dow == Calendar.SUNDAY && day == ldom) {
+                            day -= 2;
+                        } else if (dow == Calendar.SUNDAY) {
+                            day += 1;
+                        }
+
+                        tcal.setSecond(sec);
+                        tcal.setMinute(min);
+                        tcal.setHour(hr);
+                        tcal.setDayOfMonth(day);
+                        tcal.setMonth(mon - 1);
+                        if (tcal.isBefore(afterTimeLdt)) {
+                            day = 1;
+                            mon++;
+                        }
+                    }
+                } else if (nearestWeekday) {
+                    t = day;
+                    day = daysOfMonth.first();
+
+                    LocalDateTimeLegacyWrapper tcal = new LocalDateTimeLegacyWrapper(LocalDateTime.now(timeZone));
+                    tcal.setSecond(0);
+                    tcal.setMinute(0);
+                    tcal.setHour(0);
+                    tcal.setDayOfMonth(day);
+                    tcal.setMonth(mon - 1);
+                    tcal.setYear(cl.getYear());
+
+                    int ldom = getLastDayOfMonth(mon, cl.getYear());
+                    int dow = tcal.getDayOfWeek();
+
+                    if (dow == Calendar.SATURDAY && day == 1) {
+                        day += 2;
+                    } else if (dow == Calendar.SATURDAY) {
+                        day -= 1;
+                    } else if (dow == Calendar.SUNDAY && day == ldom) {
+                        day -= 2;
+                    } else if (dow == Calendar.SUNDAY) {
+                        day += 1;
+                    }
+
+                    tcal.setSecond(sec);
+                    tcal.setMinute(min);
+                    tcal.setHour(hr);
+                    tcal.setDayOfMonth(day);
+                    tcal.setMonth(mon - 1);
+                    if (tcal.isAfter(afterTimeLdt)) {
+                        day = daysOfMonth.first();
+                        mon++;
+                    }
+                } else if (st != null && st.size() != 0) {
+                    t = day;
+                    day = st.first();
+                    // make sure we don't over-run a short month, such as february
+                    int lastDay = getLastDayOfMonth(mon, cl.getYear());
+                    if (day > lastDay) {
+                        day = daysOfMonth.first();
+                        mon++;
+                    }
+                } else {
+                    day = daysOfMonth.first();
+                    mon++;
+                }
+
+                if (day != t || mon != tmon) {
+                    cl.setSecond(0);
+                    cl.setMinute(0);
+                    cl.setHour(0);
+                    cl.setDayOfMonth(day);
+                    cl.setMonth(mon - 1);
+                    // '- 1' because calendar is 0-based for this field, and we
+                    // are 1-based
+                    continue;
+                }
+            } else if (dayOfWSpec && dayOfMSpec == false) { // get day by day of week rule
+                if (lastdayOfWeek) { // are we looking for the last XXX day of
+                    // the month?
+                    int dow = daysOfWeek.first(); // desired
+                    // d-o-w
+                    int cDow = cl.getDayOfWeek(); // current d-o-w
+                    int daysToAdd = 0;
+                    if (cDow < dow) {
+                        daysToAdd = dow - cDow;
+                    }
+                    if (cDow > dow) {
+                        daysToAdd = dow + (7 - cDow);
+                    }
+
+                    int lDay = getLastDayOfMonth(mon, cl.getYear());
+
+                    if (day + daysToAdd > lDay) { // did we already miss the
+                        // last one?
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(1);
+                        cl.setMonth(mon);
+                        // no '- 1' here because we are promoting the month
+                        continue;
+                    }
+
+                    // find date of last occurrence of this day in this month...
+                    while ((day + daysToAdd + 7) <= lDay) {
+                        daysToAdd += 7;
+                    }
+
+                    day += daysToAdd;
+
+                    if (daysToAdd > 0) {
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(day);
+                        cl.setMonth(mon - 1);
+                        // '- 1' here because we are not promoting the month
+                        continue;
+                    }
+
+                } else if (nthdayOfWeek != 0) {
+                    // are we looking for the Nth XXX day in the month?
+                    int dow = daysOfWeek.first(); // desired
+                    // d-o-w
+                    int cDow = cl.getDayOfWeek(); // current d-o-w
+                    int daysToAdd = 0;
+                    if (cDow < dow) {
+                        daysToAdd = dow - cDow;
+                    } else if (cDow > dow) {
+                        daysToAdd = dow + (7 - cDow);
+                    }
+
+                    boolean dayShifted = false;
+                    if (daysToAdd > 0) {
+                        dayShifted = true;
+                    }
+
+                    day += daysToAdd;
+                    int weekOfMonth = day / 7;
+                    if (day % 7 > 0) {
+                        weekOfMonth++;
+                    }
+
+                    daysToAdd = (nthdayOfWeek - weekOfMonth) * 7;
+                    day += daysToAdd;
+                    if (daysToAdd < 0 || day > getLastDayOfMonth(mon, cl.getYear())) {
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(1);
+                        cl.setMonth(mon);
+                        // no '- 1' here because we are promoting the month
+                        continue;
+                    } else if (daysToAdd > 0 || dayShifted) {
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(day);
+                        cl.setMonth(mon - 1);
+                        // '- 1' here because we are NOT promoting the month
+                        continue;
+                    }
+                } else {
+                    int cDow = cl.getDayOfWeek(); // current d-o-w
+                    int dow = daysOfWeek.first(); // desired
+                    // d-o-w
+                    st = daysOfWeek.tailSet(cDow);
+                    if (st != null && st.size() > 0) {
+                        dow = st.first();
+                    }
+
+                    int daysToAdd = 0;
+                    if (cDow < dow) {
+                        daysToAdd = dow - cDow;
+                    }
+                    if (cDow > dow) {
+                        daysToAdd = dow + (7 - cDow);
+                    }
+
+                    int lDay = getLastDayOfMonth(mon, cl.getYear());
+
+                    if (day + daysToAdd > lDay) { // will we pass the end of
+                        // the month?
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(1);
+                        cl.setMonth(mon);
+                        // no '- 1' here because we are promoting the month
+                        continue;
+                    } else if (daysToAdd > 0) { // are we swithing days?
+                        cl.setSecond(0);
+                        cl.setMinute(0);
+                        cl.setHour(0);
+                        cl.setDayOfMonth(day + daysToAdd);
+                        cl.setMonth(mon - 1);
+                        // '- 1' because calendar is 0-based for this field,
+                        // and we are 1-based
+                        continue;
+                    }
+                }
+            } else { // dayOfWSpec && dayOfMSpec == false
+                return -1;
+                // throw new UnsupportedOperationException(
+                // ""Support for specifying both a day-of-week AND a day-of-month parameter is not implemented."");
+            }
+            cl.setDayOfMonth(day);
+
+            mon = cl.getMonth() + 1;
+            // '+ 1' because calendar is 0-based for this field, and we are
+            // 1-based
+            int year = cl.getYear();
+            t = -1;
+
+            // test for expressions that never generate a valid fire date,
+            // but keep looping...
+            if (year > MAX_YEAR) {
+                return -1;
+                // throw new ElasticsearchIllegalArgumentException(""given time is not supported by cron ["" + formatter.print(time) + ""]"");
+            }
+
+            // get month...................................................
+            st = months.tailSet(mon);
+            if (st != null && st.size() != 0) {
+                t = mon;
+                mon = st.first();
+            } else {
+                mon = months.first();
+                year++;
+            }
+            if (mon != t) {
+                cl.setSecond(0);
+                cl.setMinute(0);
+                cl.setHour(0);
+                cl.setDayOfMonth(1);
+                cl.setMonth(mon - 1);
+                // '- 1' because calendar is 0-based for this field, and we are
+                // 1-based
+                cl.setYear(year);
+                continue;
+            }
+            cl.setMonth(mon - 1);
+            // '- 1' because calendar is 0-based for this field, and we are
+            // 1-based
+
+            year = cl.getYear();
+            t = -1;
+
+            // get year...................................................
+            st = years.tailSet(year);
+            if (st != null && st.size() != 0) {
+                t = year;
+                year = st.first();
+            } else {
+                return -1;
+                // throw new ElasticsearchIllegalArgumentException(""given time is not supported by cron ["" + formatter.print(time) + ""]"");
+            }
+
+            if (year != t) {
+                cl.setSecond(0);
+                cl.setMinute(0);
+                cl.setHour(0);
+                cl.setDayOfMonth(1);
+                cl.setMonth(0);
+                // '- 1' because calendar is 0-based for this field, and we are
+                // 1-based
+                cl.setYear(year);
+                continue;
+            }
+            cl.setYear(year);
+
+            gotOne = true;
+        }"
+java,cassandra,singleton,1,// we expect EOF when rebuilding,"if (!(e.getCause() instanceof EOFException))
+                throw e;"
+java,cassandra,singleton,1,// return the closest,"return Math.max((end - 1), 0);"
+java,elasticsearch,singleton,1,// dest index with docs,var destIndex = ReindexDataStreamIndexTransportAction.generateDestIndexName(sourceIndex);
+java,hadoop,block,3,"// This means AMStartedEvents began and this event is a
+// non-AMStarted event.
+// No need to continue reading all the other events.",break;
+java,hadoop,singleton,1,"// initialize the metadata cache, if needed",initializeMetadataCache(conf);
+java,beam,singleton,1,// Neither the field nor the subfield is selected. This means we should select it.,fieldNamesToSelect.add(field.getName());
+java,elasticsearch,singleton,1,"// The following classes use MethodHandles.lookup during initialization, load them now (before SM) to be sure they succeed","AbstractRefCounted.class ,"
+java,elasticsearch,singleton,1,"// Update rate limits to be ""node-local""",var numAssignedNodes = assignedNodes.size();
+java,elasticsearch,singleton,1,// Step 1. Get field capabilities necessary to build the information of how to extract fields,FieldCapabilitiesRequest fieldCapabilitiesRequest = new FieldCapabilitiesRequest();
+java,elasticsearch,singleton,1,// 404 here means the endpoint was not created,"if (e.getResponse().getStatusLine().getStatusCode() != 404) {
+                throw e;
+            }"
+java,hadoop,singleton,1,//,"final Block blockToInvalidate = getBlockOnStorage(storedBlock, chosen);"
+java,ignite,singleton,1,// tag::delete[],"IgniteCache<Long, Person> cache = ignite.cache(""personCache"");"
+java,hadoop,singleton,1,// Avoid NPE as possible.,"if (editLogStream == null) {
+      return 0;
+    }"
+java,elasticsearch,block,2,"// #IndexMetadataVerifier#convertSharedCacheTierPreference(IndexMetadata)} later so we just store a null
+// to be able to build a temporary instance",tierPreference = null;
+java,elasticsearch,singleton,1,"// Since we have support for getLabelPosition as a runtime field, we can utilize that here by defining an implicit field","Map<String, Object> mappings = new HashMap<>();"
+java,hadoop,singleton,1,//Error getting redirect url. Fall through.,}
+java,hadoop,block,2,"// try closing the proxy. Here if someone is already using it
+// then we might not close it. In which case we will wait.",removeProxy(proxy);
+java,kafka,block,2,"// this can happen when a partition is paused before fetched records are returned to the consumer's
+// poll call or if the offset is being reset","log.debug(""Not returning fetched records for assigned partition {} since it is no longer fetchable"", tp);"
+java,beam,block,2,"// If a coder was not specified explicitly, infer it from the OutputT type parameter
+// of the output key fn.",TypeDescriptor<KeyT> keyT = TypeDescriptors.outputOf(getOutputKeyFn());
+java,ignite,block,2,"// Check classes with class loader only when classes points to classes to avoid redundant check.
+// Resources map contains two entries for class with task name(alias).","if (entry.getKey().equals(entry.getValue()) && isResourceExist(ldr, entry.getKey()) &&
+                        !U.hasParent(clsLdrToIgnore, ldr) &&
+                        (!ENABLE_IGNITE_DEPLOYMENT_ADDITIONAL_CHECK || clsLdrRsrcs.containsKey(entry.getKey())) &&
+                        ldrRsrcs.remove(ldr, clsLdrRsrcs)) {
+                        // Add class loaders in collection to notify listener outside synchronization block.
+                        rmvClsLdrs.add(ldr);
+
+                        if (log.isDebugEnabled())
+                            log.debug(""Removed resources after checking existence [ldr="" + ldr +
+                                "", clsLdrRsrcs="" + clsLdrRsrcs + "", rsrcs="" + rsrcs + ']');
+
+                        res = true;
+
+                        break;
+                    }"
+java,elasticsearch,singleton,1,// invalid secondary auth header,"getIndicesRequest.setOptions(
+            RequestOptions.DEFAULT.toBuilder().addHeader(""Authorization"", ADMIN_TOKEN).addHeader(""es-secondary-authorization"", ""junk"")
+        );"
+java,hadoop,block,2,"// if excludedRoot is an inner node, get the counts of all nodes on
+// this subtree of that storage type.","excludeCount = ((DFSTopologyNodeImpl) excludeRoot)
+            .getSubtreeStorageCount(type);"
+java,ignite,singleton,1,// Metadata for current cache must be first in list.,col.add(new GridCacheQuerySqlMetadataV2(map.remove(cacheName)));
+java,elasticsearch,singleton,1,"// create the actual bundle task, which zips up all the files for the plugin","final var bundle = project.getTasks().register(""bundlePlugin"", Zip.class, zip -> zip.with(bundleSpec));"
+java,elasticsearch,singleton,1,// TODO add WITH,"return "" | enrich "" + randomFrom(policiesOnKeyword(policies)).policyName() + "" on "" + field;"
+java,elasticsearch,singleton,1,// don't modify size until we know heap access didn't throw AIOOB.,long index = size + 1;
+java,elasticsearch,singleton,1,// Check if we can parse as a long. If so then hint that the user might prefer that.,"Long.parseLong(numeric, radix);"
+java,elasticsearch,singleton,1,// caching of check result unsupported,listener = originalListener;
+py,core,block,2,"# ensures functionality is consistent between template and trigger template
+# entities.","self._available = True
+            log_triggered_template_error(self.entity_id, err, key=CONF_AVAILABILITY)"
+py,transformers,block,5,"# endregion
+# region Load pretrained model and tokenizer
+#
+# Load pretrained model and tokenizer","config = AutoConfig.from_pretrained(
+        model_args.config_name if model_args.config_name else model_args.model_name_or_path,
+        cache_dir=model_args.cache_dir,
+        revision=model_args.model_revision,
+        token=model_args.token,
+        trust_remote_code=model_args.trust_remote_code,
+    )"
+py,core,singleton,1,# Try to connect,"if await self.aftv.adb_connect(log_errors=self._failed_connect_count == 0):
+                self._failed_connect_count = 0
+                self._attr_available = True
+            else:
+                self._failed_connect_count += 1"
+py,core,singleton,1,"# Zooz uses this vid/pid, but so do 2652 sticks","if vid == ""10C4"" and pid == ""EA60"" and description and ""2652"" in description:
+            return self.async_abort(reason=""not_zwave_device"")"
+py,transformers,singleton,1,# Instantiate the tokenizer.,"try:
+            tokenizer = cls(*init_inputs, **init_kwargs)
+        except import_protobuf_decode_error():
+            logger.info(
+                ""Unable to load tokenizer model from SPM, loading from TikToken will be attempted instead.""
+                ""(Google protobuf error: Tried to load SPM model with non-SPM vocab file)."",
+            )
+            return False
+        except RuntimeError as e:
+            if ""sentencepiece_processor.cc"" in str(e):
+                logger.info(
+                    ""Unable to load tokenizer model from SPM, loading from TikToken will be attempted instead.""
+                    ""(SentencePiece RuntimeError: Tried to load SPM model with non-SPM vocab file)."",
+                )
+            return False
+        except OSError:
+            raise OSError(
+                ""Unable to load vocabulary from file. ""
+                ""Please check that the provided vocabulary is accessible and not corrupted.""
+            )"
+py,django,block,2,"# Serve only HTTP connections.
+# FIXME: Allow to override this.","if scope[""type""] != ""http"":
+            raise ValueError(
+                ""Django can only handle ASGI/HTTP connections, not %s."" % scope[""type""]
+            )"
+py,transformers,block,4,"# this operation is a bit awkward, but it's required to
+# make sure that attn_weights keeps its gradient.
+# In order to do so, attn_weights have to be reshaped
+# twice and have to be reused in the following","attn_weights_reshaped = attn_weights.view(bsz, self.num_heads, tgt_len, src_len)
+            attn_weights = attn_weights_reshaped.view(bsz * self.num_heads, tgt_len, src_len)"
+py,transformers,block,3,"# colwise shard weight/bias to Shard(0), weight be Shard(-2) (0 if you have 1 dim only)
+# means Colwise as Linear is input * weight^T + bias, where
+# weight would become Shard(1)","if param_type == ""bias"":
+            parameter = get_tensor_shard(param, empty_param, device_mesh, rank, -1)
+            shard = [Shard(-1)]
+        else:
+            shard = [Shard(-2)]
+            parameter = get_tensor_shard(param, empty_param, device_mesh, rank, -2)
+
+        parameter = parameter.to(param_casting_dtype)
+        if to_contiguous:
+            parameter = parameter.contiguous()
+        if self.use_dtensor:
+            parameter = DTensor.from_local(parameter, device_mesh, shard, run_check=False)
+        return nn.Parameter(parameter, requires_grad=parameter.is_floating_point())"
+py,core,block,5,"# Simplified + modified version of EntityPlatform.async_reset:
+# - group.group never retries setup
+# - group.group never polls
+# - We don't need to reset EntityPlatform._setup_complete
+# - Only remove entities which were not created by service calls","tasks = [
+            entity.async_remove()
+            for entity in component.entities
+            if entity.entity_id.startswith(""group."") and not entity.created_by_service
+        ]"
+py,stablediffusion,block,3,"# img1 and img2 have range [0, 255]
+#img1 = img1.squeeze()
+#img2 = img2.squeeze()","if not img1.shape == img2.shape:
+        raise ValueError('Input images must have the same dimensions.')
+    h, w = img1.shape[:2]
+    img1 = img1[border:h-border, border:w-border]
+    img2 = img2[border:h-border, border:w-border]
+
+    img1 = img1.astype(np.float64)
+    img2 = img2.astype(np.float64)
+    mse = np.mean((img1 - img2)**2)
+    if mse == 0:
+        return float('inf')
+    return 20 * math.log10(255.0 / math.sqrt(mse))"
+py,transformers,block,2,"# The routers introduced might not always map all the tokens, to a router, which means that some hidden states
+# can be unchanged from one layer to another. That is why the hidden states are cloned before updating only the selected ones.",next_states = hidden_states.clone()
+py,django,singleton,1,"# field with relation, includes the *_id name too","try:
+                res[field.attname] = field
+            except AttributeError:
+                pass"
+py,transformers,singleton,1,# residual connection,hidden_states = residual + hidden_states
+py,transformers,singleton,1,"# decoder outputs consists of (dec_features, layer_state, dec_hidden, dec_attn)","outputs: BaseModelOutputWithPast = self.model(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+            past_key_values=past_key_values,
+            inputs_embeds=inputs_embeds,
+            use_cache=use_cache,
+            output_attentions=output_attentions,
+            output_hidden_states=output_hidden_states,
+            cache_position=cache_position,
+        )"
+py,transformers,singleton,1,# End token index of the current span in the text.,token_end_index = len(input_ids) - 1
+py,scikit-learn,block,4,"# DeprecationWarning will be replaced by ValueError, see NEP 34
+# https://numpy.org/neps/nep-0034-infer-dtype-is-object.html
+# We therefore catch both deprecation (NumPy < 1.24) warning and
+# value error (NumPy >= 1.24).","check_y_kwargs = dict(
+        accept_sparse=True,
+        allow_nd=True,
+        ensure_all_finite=False,
+        ensure_2d=False,
+        ensure_min_samples=0,
+        ensure_min_features=0,
+    )"
+py,transformers,singleton,1,# be retrained,"if fast_tokenizer.vocab_size > TARGET_VOCAB_SIZE:
+                fast_tokenizer = convert_tokenizer(fast_tokenizer)"
+py,core,singleton,1,# Remove trailing comma if it's there,"if identifier[-1] == "","":
+                    identifier = identifier[:-1]
+                notification_msg = f""{notification_msg} {identifier}."""
+py,transformers,singleton,1,# fmt: on,"rename_keys.append((""norm.weight"", ""backbone.layernorm.weight""))"
+py,localstack,singleton,1,# setup security based on the version,"self._setup_security(install_dir, parsed_version)"
+py,core,block,2,"# Update the feature attributes so the registered entity contains
+# values like unit_of_measurement and suggested_display_precision",self._async_call_update_attrs()
+py,core,singleton,1,# Update options,entry.async_on_unload(entry.add_update_listener(update_listener))
+py,ansible,block,2,"# Calculate the offset needed to strip the base_path to make relative
+# paths","if base_path is None:
+        base_path = topdir"
+py,transformers,block,3,"# idxs = context_len + torch.arange(0, context_len).unsqueeze(0) - torch.arange(0, seq_len).unsqueeze(1)
+# # matrix of context_len + i-j
+# return positional_attn.gather(3, idxs.expand([batch_size, n_head, context_len, context_len]))","positional_attn = torch.reshape(positional_attn, [batch_size, n_head, max_rel_len, seq_len])"
+py,transformers,singleton,1,# TODO (@alex-jw-brooks) add an example to this docstring once models are released,output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
+py,scikit-learn,singleton,1,# used for the convergence criterion,"error_at_init = _beta_divergence(X, W, H, beta_loss, square_root=True)"
+py,transformers,block,3,"# For SDPA, when possible, we will rely on its `is_causal` argument instead of its `attn_mask` argument, in
+# order to dispatch on Flash Attention 2. This feature is not compatible with static cache, as SDPA will fail
+# to infer the attention mask.",past_seen_tokens = past_key_values.get_seq_length() if past_key_values is not None else 0
+py,transformers,singleton,1,# Initialize weights and apply final processing,self.post_init()
+py,django,block,2,"# Potentially cleanse the request and any MultiValueDicts if they
+# are one of the frame variables.","for name, value in tb_frame.f_locals.items():
+                cleansed[name] = self.cleanse_special_types(request, value)"
+py,transformers,singleton,1,# load config from file and command-line arguments,"cfg = get_cfg()
+    add_deeplab_config(cfg)
+    add_common_config(cfg)
+    add_oneformer_config(cfg)
+    add_swin_config(cfg)
+    add_dinat_config(cfg)
+    cfg.merge_from_file(args.config_file)
+    cfg.freeze()
+    return cfg"
+py,ansible,singleton,1,# https://remram44.github.io/regex-cheatsheet/regex.html#programs,"elif re_type == 'posix_extended':
+        raise AnsibleFilterError('Regex type (%s) not yet implemented' % re_type)"
+py,core,block,2,"# output; use the original render instead of the evaluated one.
+# Complex and scientific values are also unexpected. Filter them out.","if (
+        # Filter out string and complex numbers
+        not isinstance(result, (str, complex))
+        and (
+            # Pass if not numeric and not a boolean
+            not isinstance(result, (int, float))
+            # Or it's a boolean (inherit from int)
+            or isinstance(result, bool)
+            # Or if it's a digit
+            or _IS_NUMERIC.match(render_result) is not None
+        )
+    ):
+        return result"
+py,transformers,singleton,1,# read the file,"if filename != ""warnings.txt"":
+                    continue
+                with open(file_path) as fp:
+                    parse_line(fp)"
+py,core,singleton,1,# Inside voice command,"self.in_command = True
+                    self._command_seconds_left = (
+                        self.command_seconds - self.speech_seconds
+                    )
+                    self._silence_seconds_left = self.silence_seconds
+                    _LOGGER.debug(""Voice command started"")"
+py,transformers,inline,1,"# [batch, seq_len, hidden_size]",contextualized_states = self.out_proj(scan_output.to(dtype))
+py,transformers,block,2,"# In order to do so, attn_weights have to reshaped
+# twice and have to be reused in the following","attn_weights_reshaped = attn_weights.view(bsz, self.num_heads, tgt_len, src_len)
+            attn_weights = attn_weights_reshaped.view(bsz * self.num_heads, tgt_len, src_len)"
+py,core,singleton,1,# Perform migration,"if not await self.async_migrate(hass):
+                self._async_set_state(hass, ConfigEntryState.MIGRATION_ERROR, None)
+                return"
+py,transformers,inline,1,# total_num_heads x num_chunks x window_overlap*window_overlap+window_overlap,"chunked_hidden_states = chunked_hidden_states.view(
+            total_num_heads, num_chunks, -1
+        )"
+py,transformers,inline,1,"# (n_docs, max_len)",generator_input_ids = context_input_ids[index * n_docs : (index + 1) * n_docs]
+py,ComfyUI,singleton,1,# prepare txt for attention,txt_modulated = self.txt_norm1(txt)
+py,django,singleton,1,# There shouldn't be any operations pending at this point.,from django.core.checks.model_checks import _check_lazy_references
+py,core,singleton,1,# add listeners to handle new values that get added later,"for event in (""value added"", EVENT_VALUE_UPDATED, ""metadata updated""):
+            self.config_entry.async_on_unload(
+                node.on(
+                    event,
+                    lambda event: self.hass.async_create_task(
+                        self.async_on_value_added(
+                            value_updates_disc_info, event[""value""]
+                        )
+                    ),
+                )
+            )"
+py,ansible,singleton,1,# the child process runs the actual module,"notice(""Start module (%s)"" % os.getpid())
+                _run_module(cmd, jid)
+                notice(""Module complete (%s)"" % os.getpid())"
+py,transformers,singleton,1,# We verify the out indices and out features are valid,"verify_out_features_out_indices(
+            out_features=out_features, out_indices=out_indices, stage_names=self.stage_names
+        )"
+py,core,singleton,1,# Create new credentials.,"return self.async_create_credentials({""username"": username})"
+py,core,block,2,"# If it doesn't begin with a bed id or end with one of the sensor types,
+# it doesn't need to be migrated","if parts[0] not in bed_ids or not old_unique_id.endswith(tuple(sensor_types)):
+            return None"
+py,django,singleton,1,# Retrieve objects from parameters.,"try:
+            source_model = apps.get_model(app_label, model_name)
+        except LookupError as e:
+            raise PermissionDenied from e"
+py,transformers,block,2,"# can concat previous decoder key/value_states to current projected key/value_states (third ""elif"" case)
+# if encoder bi-directional self-attention `past_key_value` is always `None`","past_key_value = (key_states, value_states)"
+py,transformers,singleton,1,"# [*, no_angles, 2]","s = s.view(s.shape[:-1] + (-1, 2))"
+py,localstack,singleton,1,# this is a hack since we currently cannot know whether boot scripts have been executed or not,"init_script_manager().stage_completed[Stage.BOOT] = True
+    _run_and_log(Stage.START)"
+py,transformers,singleton,1,# Leave attn_output unchanged,"global_attn_probs = tf.zeros((batch_size, self.num_heads, max_num_global_attn_indices, seq_len))"
+py,transformers,block,6,"# Further calls to cross_attention layer can then reuse all cross-attention
+# key/value_states (first ""if"" case)
+# if uni-directional self-attention (decoder) save Tuple(torch.Tensor, torch.Tensor) of
+# all previous decoder key/value_states. Further calls to uni-directional self-attention
+# can concat previous decoder key/value_states to current projected key/value_states (third ""elif"" case)
+# if encoder bi-directional self-attention `past_key_value` is always `None`","past_key_value = (key_layer, value_layer)"
+py,core,singleton,1,# Maybe the next alive message will result in a successful connection,self._ssdp_connect_failed = False
+py,transformers,inline,1,# M_top,"top_u_sparsity_measurement = sparsity_measurement.topk(u, sorted=False)[1]"
+py,ansible,singleton,1,"# In Python < 3.3, os.sched_getaffinity() is not available","nproc_cmd = self.module.get_bin_path('nproc')
+            if nproc_cmd is not None:
+                rc, out, _err = self.module.run_command(nproc_cmd)
+                if rc == 0:
+                    cpu_facts['processor_nproc'] = int(out)"
+py,transformers,singleton,1,# Transpose,query_layer = self.transpose_for_scores(query_layer)
+py,transformers,singleton,1,# compute accuracy,"accuracy = jnp.equal(jnp.argmax(logits, axis=-1), labels) * label_mask"
+py,core,singleton,1,# Add entity to query full system,"entities.append(
+        ISYNodeQueryButtonEntity(
+            node=isy,
+            name=""Query"",
+            unique_id=f""{isy.uuid}_query"",
+            device_info=DeviceInfo(identifiers={(DOMAIN, isy.uuid)}),
+            entity_category=EntityCategory.DIAGNOSTIC,
+        )
+    )"
+py,core,inline,1,# noqa: F401 pylint: disable=import-outside-toplevel,import cv2
+py,ansible,singleton,1,# Keep track of context for warning messages,options_context.append(param)
+py,scikit-learn,block,2,"# proportion of outliers equal to contamination parameter when not
+# set to 'auto'","expected_outliers = 30
+        contamination = float(expected_outliers) / n_samples
+        estimator.set_params(contamination=contamination)
+        y_pred = estimator.fit_predict(X)
+
+        num_outliers = np.sum(y_pred != 1)
+        # num_outliers should be equal to expected_outliers unless
+        # there are ties in the decision_function values. this can
+        # only be tested for estimators with a decision_function
+        # method
+        if num_outliers != expected_outliers and hasattr(
+            estimator, ""decision_function""
+        ):
+            decision = estimator.decision_function(X)
+            check_outlier_corruption(num_outliers, expected_outliers, decision)"
+py,localstack,singleton,1,# call hooks to prepare host (note that this call should stay below the config overrides above),bootstrap.prepare_host(console)
+py,core,inline,1,# Service Discovery,"self.register_plugin(""xep_0128"")"
+py,transformers,block,2,"# Compute loss in fp32 to match with mesh-tf version
+# https://github.com/EleutherAI/gpt-neo/blob/89ce74164da2fb16179106f54e2269b5da8db333/models/gpt2/gpt2.py#L179",lm_logits = lm_logits.to(torch.float32)
+py,ansible,singleton,1,# DMI SPEC -- https://www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.2.0.pdf,"FORM_FACTOR = [""Unknown"", ""Other"", ""Unknown"", ""Desktop"",
+                           ""Low Profile Desktop"", ""Pizza Box"", ""Mini Tower"", ""Tower"",
+                           ""Portable"", ""Laptop"", ""Notebook"", ""Hand Held"", ""Docking Station"",
+                           ""All In One"", ""Sub Notebook"", ""Space-saving"", ""Lunch Box"",
+                           ""Main Server Chassis"", ""Expansion Chassis"", ""Sub Chassis"",
+                           ""Bus Expansion Chassis"", ""Peripheral Chassis"", ""RAID Chassis"",
+                           ""Rack Mount Chassis"", ""Sealed-case PC"", ""Multi-system"",
+                           ""CompactPCI"", ""AdvancedTCA"", ""Blade"", ""Blade Enclosure"",
+                           ""Tablet"", ""Convertible"", ""Detachable"", ""IoT Gateway"",
+                           ""Embedded PC"", ""Mini PC"", ""Stick PC""]
+
+            DMI_DICT = {
+                'bios_date': '/sys/devices/virtual/dmi/id/bios_date',
+                'bios_vendor': '/sys/devices/virtual/dmi/id/bios_vendor',
+                'bios_version': '/sys/devices/virtual/dmi/id/bios_version',
+                'board_asset_tag': '/sys/devices/virtual/dmi/id/board_asset_tag',
+                'board_name': '/sys/devices/virtual/dmi/id/board_name',
+                'board_serial': '/sys/devices/virtual/dmi/id/board_serial',
+                'board_vendor': '/sys/devices/virtual/dmi/id/board_vendor',
+                'board_version': '/sys/devices/virtual/dmi/id/board_version',
+                'chassis_asset_tag': '/sys/devices/virtual/dmi/id/chassis_asset_tag',
+                'chassis_serial': '/sys/devices/virtual/dmi/id/chassis_serial',
+                'chassis_vendor': '/sys/devices/virtual/dmi/id/chassis_vendor',
+                'chassis_version': '/sys/devices/virtual/dmi/id/chassis_version',
+                'form_factor': '/sys/devices/virtual/dmi/id/chassis_type',
+                'product_name': '/sys/devices/virtual/dmi/id/product_name',
+                'product_serial': '/sys/devices/virtual/dmi/id/product_serial',
+                'product_uuid': '/sys/devices/virtual/dmi/id/product_uuid',
+                'product_version': '/sys/devices/virtual/dmi/id/product_version',
+                'system_vendor': '/sys/devices/virtual/dmi/id/sys_vendor',
+            }
+
+            for (key, path) in DMI_DICT.items():
+                data = get_file_content(path)
+                if data is not None:
+                    if key == 'form_factor':
+                        try:
+                            dmi_facts['form_factor'] = FORM_FACTOR[int(data)]
+                        except IndexError:
+                            dmi_facts['form_factor'] = 'unknown (%s)' % data
+                    else:
+                        dmi_facts[key] = data
+                else:
+                    dmi_facts[key] = 'NA'"
+py,ComfyUI,inline,1,#Stable diffusion x4 upscaler VAE,:
+py,transformers,block,5,"# key/value_states (first ""if"" case)
+# if uni-directional self-attention (decoder) save Tuple(tf.Tensor, tf.Tensor) of
+# all previous decoder key/value_states. Further calls to uni-directional self-attention
+# can concat previous decoder key/value_states to current projected key/value_states (third ""elif"" case)
+# if encoder bi-directional self-attention `past_key_value` is always `None`","past_key_value = (key_states, value_states)"
+py,transformers,singleton,1,"# the batch size = 1 case, `position_ids` is already contiguous but with varying stride which retriggers a capture.","model_inputs = {""input_ids"": input_ids.clone(memory_format=torch.contiguous_format), ""inputs_embeds"": None}"
+py,core,inline,1,# only used in for check config script,:
+py,transformers,block,2,"# Overwriting the output name as ""present"" since it is the name used for the ONNX outputs
+# (""past_key_values"" being taken for the ONNX inputs)","if name == ""past_key_values"":
+            name = ""present""
+        if isinstance(value, (list, tuple)):
+            value = config.flatten_output_collection_property(name, value)
+            ref_outputs_dict.update(value)
+        else:
+            ref_outputs_dict[name] = value"
+py,transformers,block,4,"# The embedding table in BERT models accounts for a substantial proportion of model size. To compress
+# the embedding layer, we reduce the embedding dimension to 128 in MobileBERT.
+# Then, we apply a 1D convolution with kernel size 3 on the raw token embedding to produce a 512
+# dimensional output.","inputs_embeds = torch.cat(
+                [
+                    nn.functional.pad(inputs_embeds[:, 1:], [0, 0, 0, 1, 0, 0], value=0.0),
+                    inputs_embeds,
+                    nn.functional.pad(inputs_embeds[:, :-1], [0, 0, 1, 0, 0, 0], value=0.0),
+                ],
+                dim=2,
+            )"
+py,transformers,block,2,"# For the other tokens in a word, we set the label to either the current label or -100, depending on
+# the label_all_tokens flag.","else:
+                    label_ids.append(label_to_id[label[word_idx]] if data_args.label_all_tokens else -100)"
+py,transformers,inline,1,# disable dropout,roberta.eval()
+py,transformers,inline,1,# Here _preprocess needs do_pad and pad_size.,","
+py,ansible,block,5,"# We store accumulated stdout and stderr output from the process here,
+# but strip any privilege escalation prompt/confirmation lines first.
+# Output is accumulated into tmp_*, complete lines are extracted into
+# an array, then checked and removed or copied to stdout or stderr. We
+# set any flags based on examining the output in self._flags.",b_stdout = b_stderr = b''
+py,core,singleton,1,# Add conditions for each entity that belongs to this integration,"base_condition = {
+            CONF_CONDITION: ""device"",
+            CONF_DEVICE_ID: device_id,
+            CONF_DOMAIN: DOMAIN,
+            CONF_ENTITY_ID: entry.id,
+        }"
+py,transformers,singleton,1,# add LayerDrop (see https://arxiv.org/abs/1909.11556 for description),dropout_probability = torch.rand([])
+py,django,singleton,1,# Autoincrement SQL (for backends with inline variant).,col_type_suffix = field.db_type_suffix(connection=self.connection)
+py,transformers,singleton,1,"# [bsz, n_heads, from_seq_len//from_block_size-4, from_block_size, n_rand_blocks*to_block_size] x [bsz, n_heads, from_seq_len//from_block_size-4, n_rand_blocks*to_block_size, -1]","context_layer += self.torch_bmm_nd(
+            attn_weights[:, :, :, :, 4 * to_block_size : -to_block_size], gathered_value[:, :, 1:-1], ndim=5
+        )"
+py,scikit-learn,inline,1,# hide NaN warnings,:
+py,keras,singleton,1,# Create segment IDs for Splash Attention (for packing/batching),"segment_ids = jnp.zeros([bs, q_len], dtype=jnp.int32)"
+py,transformers,block,3,"# all previous decoder key/value_states. Further calls to uni-directional self-attention
+# can concat previous decoder key/value_states to current projected key/value_states (third ""elif"" case)
+# if encoder bi-directional self-attention `past_key_value` is always `None`","past_key_value = (key_states, value_states)"
+py,core,singleton,1,# in case the official Mosquitto Broker addon was re-installed.,"if (
+                    entry_data[CONF_BROKER] == addon_discovery_config[CONF_HOST]
+                    and entry_data[CONF_PORT] == addon_discovery_config[CONF_PORT]
+                    and entry_data.get(CONF_USERNAME)
+                    == (username := addon_discovery_config.get(CONF_USERNAME))
+                    and entry_data.get(CONF_PASSWORD)
+                    != (password := addon_discovery_config.get(CONF_PASSWORD))
+                ):
+                    _LOGGER.info(
+                        ""Executing autorecovery %s add-on secrets"",
+                        addon_manager.addon_name,
+                    )
+                    return await self.async_step_reauth_confirm(
+                        user_input={CONF_USERNAME: username, CONF_PASSWORD: password}
+                    )"
+py,transformers,singleton,1,# Parse in args that could be `dict` sent in from the CLI as a string,"for field in self._VALID_DICT_FIELDS:
+            passed_value = getattr(self, field)
+            # We only want to do this if the str starts with a bracket to indicate a `dict`
+            # else its likely a filename if supported
+            if isinstance(passed_value, str) and passed_value.startswith(""{""):
+                loaded_dict = json.loads(passed_value)
+                # Convert str values to types if applicable
+                loaded_dict = _convert_str_dict(loaded_dict)
+                setattr(self, field, loaded_dict)"
+py,core,singleton,1,# Convert 0-100 to 0-254,data[STATE_BRIGHTNESS] = round(percentage * HUE_API_STATE_BRI_MAX / 100)
+py,transformers,singleton,1,# RAG-token marginalization,"seq_logprobs = nn.functional.log_softmax(seq_logits, dim=-1).view(
+            seq_logits.shape[0] // n_docs, n_docs, -1, seq_logits.size(-1)
+        )"
+py,django,block,6,"# For join promotion this case is doing an AND for the added q_object
+# and existing conditions. So, any existing inner join forces the join
+# type to remain inner. Existing outer joins can however be demoted.
+# (Consider case where rel_a is LOUTER and rel_a__col=1 is added - if
+# rel_a doesn't produce any rows, then the whole condition must fail.
+# So, demotion is OK.","existing_inner = {
+            a for a in self.alias_map if self.alias_map[a].join_type == INNER
+        }"
+py,ansible,block,71,"# What it is we are wrapping here could be anything. We need to
+# try and detect specific cases though. In particular, we need
+# to detect when we are given something that is a method of a
+# class. Further, we need to know when it is likely an instance
+# method, as opposed to a class or static method. This can
+# become problematic though as there isn't strictly a fool proof
+# method of knowing.
+#
+# The situations we could encounter when wrapping a method are:
+#
+# 1. The wrapper is being applied as part of a decorator which
+# is a part of the class definition. In this case what we are
+# given is the raw unbound function, classmethod or staticmethod
+# wrapper objects.
+#
+# The problem here is that we will not know we are being applied
+# in the context of the class being set up. This becomes
+# important later for the case of an instance method, because in
+# that case we just see it as a raw function and can't
+# distinguish it from wrapping a normal function outside of
+# a class context.
+#
+# 2. The wrapper is being applied when performing monkey
+# patching of the class type afterwards and the method to be
+# wrapped was retrieved direct from the __dict__ of the class
+# type. This is effectively the same as (1) above.
+#
+# 3. The wrapper is being applied when performing monkey
+# patching of the class type afterwards and the method to be
+# wrapped was retrieved from the class type. In this case
+# binding will have been performed where the instance against
+# which the method is bound will be None at that point.
+#
+# This case is a problem because we can no longer tell if the
+# method was a static method, plus if using Python3, we cannot
+# tell if it was an instance method as the concept of an
+# unnbound method no longer exists.
+#
+# 4. The wrapper is being applied when performing monkey
+# patching of an instance of a class. In this case binding will
+# have been perfomed where the instance was not None.
+#
+# This case is a problem because we can no longer tell if the
+# method was a static method.
+#
+# Overall, the best we can do is look at the original type of the
+# object which was wrapped prior to any binding being done and
+# see if it is an instance of classmethod or staticmethod. In
+# the case where other decorators are between us and them, if
+# they do not propagate the __class__  attribute so that the
+# isinstance() checks works, then likely this will do the wrong
+# thing where classmethod and staticmethod are used.
+#
+# Since it is likely to be very rare that anyone even puts
+# decorators around classmethod and staticmethod, likelihood of
+# that being an issue is very small, so we accept it and suggest
+# that those other decorators be fixed. It is also only an issue
+# if a decorator wants to actually do things with the arguments.
+#
+# As to not being able to identify static methods properly, we
+# just hope that that isn't something people are going to want
+# to wrap, or if they do suggest they do it the correct way by
+# ensuring that it is decorated in the class definition itself,
+# or patch it in the __dict__ of the class type.
+#
+# So to get the best outcome we can, whenever we aren't sure what
+# it is, we label it as a 'function'. If it was already bound and
+# that is rebound later, we assume that it will be an instance
+# method and try an cope with the possibility that the 'self'
+# argument it being passed as an explicit argument and shuffle
+# the arguments around to extract 'self' for use as the instance.","if isinstance(wrapped, classmethod):
+            binding = 'classmethod'
+
+        elif isinstance(wrapped, staticmethod):
+            binding = 'staticmethod'
+
+        elif hasattr(wrapped, '__self__'):
+            if inspect.isclass(wrapped.__self__):
+                binding = 'classmethod'
+            else:
+                binding = 'function'
+
+        else:
+            binding = 'function'
+
+        super(FunctionWrapper, self).__init__(wrapped, None, wrapper,
+                enabled, binding)"
+py,ansible,singleton,1,#   unaffected. src and dst are path names given as strings.,"shutil.copy2(src, dest)"
+py,localstack,singleton,1,# https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html,"error = ""One or more parameters are invalid. ""
+    error += f""Reason: Message must be shorter than {max_message_size} bytes.""
+    if (
+        _message_body_size(message_body) + _message_attributes_size(message_attributes)
+        > max_message_size
+    ):
+        raise InvalidParameterValueException(error)"
+py,transformers,block,2,"# important: this ported version of PaliGemmaisn't meant for training from scratch - only
+# inference and fine-tuning","std = getattr(self.config, ""initializer_range"", self.config.get_text_config().initializer_range)
+
+        if isinstance(module, nn.Linear):
+            module.weight.data.normal_(mean=0.0, std=std)
+            if module.bias is not None:
+                module.bias.data.zero_()"
+py,keras,singleton,1,# Ensure dtype is float.,"if not np.issubdtype(real.dtype, np.floating) or not np.issubdtype(
+        imag.dtype, np.floating
+    ):
+        raise ValueError(
+            ""At least one tensor in input `x` is not of type float.""
+            f""Received: x={x}.""
+        )"
+py,core,singleton,1,# Scenes are not yet supported.,self._attr_color_mode = ColorMode.UNKNOWN
+py,localstack,singleton,1,# exception handlers in the chain,"self.exception_handlers.extend(
+            [
+                handlers.log_exception,
+                handlers.serve_custom_exception_handlers,
+                handlers.handle_service_exception,
+                handlers.handle_internal_failure,
+            ]
+        )"
+py,transformers,singleton,1,# cls_token: [1 x num_input_channels x 1 x d_model],"self.cls_token = nn.Parameter(torch.zeros(1, 1, 1, config.d_model))
+            num_patches += 1"
+py,transformers,singleton,1,# We add an image token so we resize the model,"model.resize_token_embeddings(config.text_config.vocab_size + 2, pad_shape)"
+py,transformers,block,3,"# make sure that attn_weights keeps its gradient.
+# In order to do so, attn_weights have to reshaped
+# twice and have to be reused in the following","attn_weights_reshaped = attn_weights.view(batch_size, self.num_heads, target_len, source_len)
+            attn_weights = attn_weights_reshaped.view(batch_size * self.num_heads, target_len, source_len)"
+py,transformers,block,2,"# important change bos & pad token id since CTC symbol is <pad> and
+# not <s> as in fairseq",config.bos_token_id = target_dict.pad_index
+py,ansible,singleton,1,# can be empty list sans any tuple,return best_secret
+py,transformers,singleton,1,# IN1K finetuned,"names_to_from_model_map[""regnet-y-320-seer-in1k""] = partial(
+        load_using_classy_vision,
+        ""https://dl.fbaipublicfiles.com/vissl/model_zoo/seer_finetuned/seer_regnet32_finetuned_in1k_model_final_checkpoint_phase78.torch"",
+        lambda: FakeRegNetVisslWrapper(RegNetY32gf()),
+    )"
+rs,rust,singleton,1,// CodegenCx.structs_as_pointer,"aggregate_value.dereference_field(self.location, struct_type.get_field(idx as i32))"
+rs,deno,singleton,1,"// this block, it doesn't get aborted",self.0.take();
+rs,deno,inline,1,// failed analyzing,false
+rs,uv,block,2,"// reinstalled. This matches user expectations: `uv pip install .` should always
+// re-build and re-install the package in the current working directory.","for requirement in &requirements {
+                let requirement = match requirement {
+                    RequirementsSource::Package(requirement) => requirement,
+                    RequirementsSource::Editable(requirement) => requirement,
+                    _ => continue,
+                };
+                match requirement {
+                    RequirementsTxtRequirement::Named(requirement) => {
+                        if let Some(VersionOrUrl::Url(url)) = requirement.version_or_url.as_ref() {
+                            if let ParsedUrl::Directory(ParsedDirectoryUrl {
+                                install_path, ..
+                            }) = &url.parsed_url
+                            {
+                                debug!(
+                                    ""Marking explicit source tree for reinstall: `{}`"",
+                                    install_path.display()
+                                );
+                                args.settings.reinstall = args
+                                    .settings
+                                    .reinstall
+                                    .with_package(requirement.name.clone());
+                            }
+                        }
+                    }
+                    RequirementsTxtRequirement::Unnamed(requirement) => {
+                        if let ParsedUrl::Directory(ParsedDirectoryUrl { install_path, .. }) =
+                            &requirement.url.parsed_url
+                        {
+                            debug!(
+                                ""Marking explicit source tree for reinstall: `{}`"",
+                                install_path.display()
+                            );
+                            args.settings.reinstall =
+                                args.settings.reinstall.with_path(install_path.clone());
+                        }
+                    }
+                }
+            }"
+rs,rust,block,4,"// type.
+//
+// NOTE: This should be kept in sync with the similar code in
+// `rustc_ty_utils::instance::resolve_associated_item()`.","match specialization_graph::assoc_def(
+                    selcx.tcx(),
+                    impl_data.impl_def_id,
+                    obligation.predicate.def_id,
+                ) {
+                    Ok(node_item) => {
+                        if node_item.is_final() {
+                            // Non-specializable items are always projectable.
+                            true
+                        } else {
+                            // Only reveal a specializable default if we're past type-checking
+                            // and the obligation is monomorphic, otherwise passes such as
+                            // transmute checking and polymorphic MIR optimizations could
+                            // get a result which isn't correct for all monomorphizations.
+                            match selcx.infcx.typing_mode() {
+                                TypingMode::Coherence
+                                | TypingMode::Analysis { .. }
+                                | TypingMode::Borrowck { .. }
+                                | TypingMode::PostBorrowckAnalysis { .. } => {
+                                    debug!(
+                                        assoc_ty = ?selcx.tcx().def_path_str(node_item.item.def_id),
+                                        ?obligation.predicate,
+                                        ""not eligible due to default"",
+                                    );
+                                    false
+                                }
+                                TypingMode::PostAnalysis => {
+                                    // NOTE(eddyb) inference variables can resolve to parameters, so
+                                    // assume `poly_trait_ref` isn't monomorphic, if it contains any.
+                                    let poly_trait_ref =
+                                        selcx.infcx.resolve_vars_if_possible(trait_ref);
+                                    !poly_trait_ref.still_further_specializable()
+                                }
+                            }
+                        }
+                    }
+                    // Always project `ErrorGuaranteed`, since this will just help
+                    // us propagate `TyKind::Error` around which suppresses ICEs
+                    // and spurious, unrelated inference errors.
+                    Err(ErrorGuaranteed { .. }) => true,
+                }"
+rs,rust,block,4,"//     `let Some(_) = a.is_some() && b`
+//                     ++++++++++
+// since the user probably just misunderstood how `let else`
+// and `&&` work together.","if let Some((_, hir::Node::LetStmt(local))) = cond_parent
+            && let hir::PatKind::Expr(PatExpr { kind: PatExprKind::Path(qpath), .. })
+            | hir::PatKind::TupleStruct(qpath, _, _) = &local.pat.kind
+            && let hir::QPath::Resolved(None, path) = qpath
+            && let Some(did) = path
+                .res
+                .opt_def_id()
+                .and_then(|did| self.tcx.opt_parent(did))
+                .and_then(|did| self.tcx.opt_parent(did))
+            && self.tcx.is_diagnostic_item(sym::Option, did)
+        {
+            return false;
+        }"
+rs,rust,singleton,1,"// create var lazily, at most once",let coercion = Coercion(span);
+rs,rust,block,3,"// this error anymore without first having hit a trait solver error.
+// Very fuzzy on the details here, but pattern types are an internal impl detail,
+// so we can just go with this for now","if scalar.is_signed() {
+                            let range = scalar.valid_range_mut();
+                            let start = layout.size.sign_extend(range.start);
+                            let end = layout.size.sign_extend(range.end);
+                            if end < start {
+                                let guar = tcx.dcx().err(format!(
+                                    ""pattern type ranges cannot wrap: {start}..={end}""
+                                ));
+
+                                return Err(error(cx, LayoutError::ReferencesError(guar)));
+                            }
+                        } else {
+                            let range = scalar.valid_range_mut();
+                            if range.end < range.start {
+                                let guar = tcx.dcx().err(format!(
+                                    ""pattern type ranges cannot wrap: {}..={}"",
+                                    range.start, range.end
+                                ));
+
+                                return Err(error(cx, LayoutError::ReferencesError(guar)));
+                            }
+                        }"
+rs,uv,singleton,1,// Lock all extras and development dependencies.,"for node_index in resolution.graph.node_indices() {
+            let ResolutionGraphNode::Dist(dist) = &resolution.graph[node_index] else {
+                continue;
+            };
+            if let Some(extra) = dist.extra.as_ref() {
+                let id = PackageId::from_annotated_dist(dist, root)?;
+                let Some(package) = packages.get_mut(&id) else {
+                    return Err(LockErrorKind::MissingExtraBase {
+                        id,
+                        extra: extra.clone(),
+                    }
+                    .into());
+                };
+                for edge in resolution.graph.edges(node_index) {
+                    let ResolutionGraphNode::Dist(dependency_dist) =
+                        &resolution.graph[edge.target()]
+                    else {
+                        continue;
+                    };
+                    let marker = *edge.weight();
+                    package.add_optional_dependency(
+                        &requires_python,
+                        extra.clone(),
+                        dependency_dist,
+                        marker,
+                        root,
+                    )?;
+                }
+            }
+            if let Some(group) = dist.dev.as_ref() {
+                let id = PackageId::from_annotated_dist(dist, root)?;
+                let Some(package) = packages.get_mut(&id) else {
+                    return Err(LockErrorKind::MissingDevBase {
+                        id,
+                        group: group.clone(),
+                    }
+                    .into());
+                };
+                for edge in resolution.graph.edges(node_index) {
+                    let ResolutionGraphNode::Dist(dependency_dist) =
+                        &resolution.graph[edge.target()]
+                    else {
+                        continue;
+                    };
+                    let marker = *edge.weight();
+                    package.add_group_dependency(
+                        &requires_python,
+                        group.clone(),
+                        dependency_dist,
+                        marker,
+                        root,
+                    )?;
+                }
+            }
+        }"
+rs,rust,singleton,1,// Here we rely on `range_as_init_chunks` to yield alternating init/uninit chunks.,"for chunk in chunks {
+            let len = chunk.range().end.bytes() - chunk.range().start.bytes();
+            ranges.push(len);
+        }"
+rs,zed,inline,1,"// If it fails again, wait longer.",retry_delay *= 2;
+rs,rust,block,12,"// Hack: we know that there are traits implementing Fn for &F
+// where F:Fn and so forth. In the particular case of types
+// like `f: &mut FnMut()`, if there is a call `f()`, we would
+// normally translate to `FnMut::call_mut(&mut f, ())`, but
+// that winds up potentially requiring the user to mark their
+// variable as `mut` which feels unnecessary and unexpected.
+//
+//     fn foo(f: &mut impl FnMut()) { f() }
+//            ^ without this hack `f` would have to be declared as mutable
+//
+// The simplest fix by far is to just ignore this case and deref again,
+// so we wind up with `FnMut::call_mut(&mut *f, ())`.","ty::Ref(..) if autoderef.step_count() == 0 => {
+                return None;
+            }"
+rs,rust,block,9,"// }
+//
+// as seen in the `html5ever` benchmark. We use a `Cow` so that the base
+// parser is only cloned when necessary (upon mutation). Furthermore, we
+// reinitialize the `Cow` with the base parser at the start of every
+// iteration, so that any mutated parsers are not reused. This is all quite
+// hacky, but speeds up the `html5ever` benchmark significantly. (Issue
+// 68836 suggests a more comprehensive but more complex change to deal with
+// this situation.)","let parser = parser_from_cx(psess, arg.clone(), T::recovery());"
+rs,rust,singleton,1,// flip to them.,self.bytes_used += 2 * canonicalized.canonicalized_words.len();
+rs,uv,singleton,1,// `<1.0.0+[max]` is equivalent to `<1.0.0`,"if b.local() == LocalVersionSlice::Max {
+                    upper = Bound::Included(b.clone().without_local());
+                }"
+rs,union,singleton,1,// the event property that contains the wasm contract address that emitted the event,"const TYPE: &str = ""type"";"
+rs,rust,singleton,2,// due to rule C.,"if let_kind == LetKind::Super {
+        if let Some(scope) = visitor.extended_super_lets.remove(&pat.unwrap().hir_id.local_id) {
+            // This expression was lifetime-extended by a parent let binding. E.g.
+            //
+            //     let a = {
+            //         super let b = temp();
+            //         &b
+            //     };
+            //
+            // (Which needs to behave exactly as: let a = &temp();)
+            //
+            // Processing of `let a` will have already decided to extend the lifetime of this
+            // `super let` to its own var_scope. We use that scope.
+            visitor.cx.var_parent = scope;
+        } else {
+            // This `super let` is not subject to lifetime extension from a parent let binding. E.g.
+            //
+            //     identity({ super let x = temp(); &x }).method();
+            //
+            // (Which needs to behave exactly as: identity(&temp()).method();)
+            //
+            // Iterate up to the enclosing destruction scope to find the same scope that will also
+            // be used for the result of the block itself.
+            while let Some(s) = visitor.cx.var_parent {
+                let parent = visitor.scope_tree.parent_map.get(&s).cloned();
+                if let Some(Scope { data: ScopeData::Destruction, .. }) = parent {
+                    break;
+                }
+                visitor.cx.var_parent = parent;
+            }
+        }
+    }"
+rs,rust,block,3,"// If the pattern is using placeholders for field names then order
+// independence doesn't make sense. Fall back to regular ordered
+// matching.","return self.attempt_match_node_children(phase, pattern, code);"
+rs,zed,singleton,1,// Populate repository entries.,let mut repositories = Vec::new();
+rs,rust,block,2,"// FIXME: this doesn't account for trivial derefs, but works as a first
+// approximation.","&& (
+                                // `T: Trait` && `&&T: OtherTrait`, we want `OtherTrait`
+                                self.can_eq(
+                                    obligation.param_env,
+                                    leaf_trait_predicate.self_ty().skip_binder(),
+                                    root_pred.self_ty().peel_refs(),
+                                )
+                                // `&str: Iterator` && `&str: IntoIterator`, we want `IntoIterator`
+                                || self.can_eq(
+                                    obligation.param_env,
+                                    leaf_trait_predicate.self_ty().skip_binder(),
+                                    root_pred.self_ty(),
+                                )
+                            )"
+rs,deno,singleton,1,"// 3-byte or 4-byte UTF-8 sequence, or invalid UTF-8",latin1_bytes.push(b'?');
+rs,rust,block,2,"// We only accept this routine to be invoked on implementations
+// of a trait, not inherent implementations.",let trait_ref = tcx.impl_trait_ref(impl_def_id).unwrap();
+rs,rust,block,6,"// If the crate doesn't have an `allocator_kind` set then there's definitely
+// no shim to generate. Otherwise we also check our dependency graph for all
+// our output crate types. If anything there looks like its a `Dynamic`
+// linkage, then it's already got an allocator shim and we'll be using that
+// one instead. If nothing exists then it's our job to generate the
+// allocator!","let any_dynamic_crate = tcx.dependency_formats(()).iter().any(|(_, list)| {
+        use rustc_middle::middle::dependency_format::Linkage;
+        list.iter().any(|&linkage| linkage == Linkage::Dynamic)
+    });"
+rs,rust,singleton,1,// Expr using the name node id.,"let expr = Expr {
+                                id: sym.id,
+                                kind: ExprKind::Path(sym.qself.clone(), sym.path.clone()),
+                                span: *op_sp,
+                                attrs: AttrVec::new(),
+                                tokens: None,
+                            };"
+rs,uv,singleton,1,// Use a portable representation for relative paths.,"path.to_slash()
+            .map(Either::Left)
+            .unwrap_or_else(|| Either::Right(path.display()))"
+rs,zed,singleton,1,// Upper case,target.to_uppercase()
+rs,rust,block,21,"// will have DB index of 1. Not quite what we want. So we apply
+// the instantiation to the *contents* of the trait reference,
+// rather than the trait reference itself (put another way, the
+// instantiation code expects equal binding levels in the values
+// from the instantiation and the value being instantiated into, and
+// this trick achieves that).
+// Working through the second example:
+// trait_ref: for<'x> T: Foo1<'^0.0>; args: [T, '^0.0]
+// predicate: for<'b> Self: Bar1<'a, '^0.0>; args: [Self, 'a, '^0.0]
+// We want to end up with:
+//     for<'x, 'b> T: Bar1<'^0.0, '^0.1>
+// To do this:
+// 1) We must shift all bound vars in predicate by the length
+//    of trait ref's bound vars. So, we would end up with predicate like
+//    Self: Bar1<'a, '^0.1>
+// 2) We can then apply the trait args to this, ending up with
+//    T: Bar1<'^0.0, '^0.1>
+// 3) Finally, to create the final bound vars, we concatenate the bound
+//    vars of the trait ref with those of the predicate:
+//    ['x, 'b]",let bound_pred = self.kind();
+rs,uv,singleton,1,// Resolve the settings from the command-line arguments and workspace configuration.,"let args = PipFreezeSettings::resolve(args, filesystem);"
+rs,sway,block,2,"// We don't look for the first operand being a constant and the second
+// one a base register. Such patterns must be canonicalised prior.","if let Some(&RegContents::Constant(c2)) = reg_contents.get(opd2) {
+                                process_add(&mut reg_contents, &mut latest_version, dest, opd1, c2);
+                            } else {
+                                reg_contents.remove(dest);
+                                record_new_def(&mut latest_version, dest);
+                            }"
+rs,rust,singleton,1,"// we check if the RHS is a deref operation, to suggest removing it.","suggest_remove_deref(err, &expr);"
+rs,rust,singleton,1,// Create a Parser.,let psess = ParseSess::new(rustc_driver::DEFAULT_LOCALE_RESOURCES.to_vec());
+rs,fuel-core,singleton,1,// send latest `BlockHeight`,"self.outbound = Some(OutboundState::SendingBlockHeight(
+                    send_block_height(stream, block_height).boxed(),
+                ))"
+rs,rust,singleton,1,// FIXME: is it a problem to discard the error here?,"let op = ecx.const_val_to_op(val, ty, None).discard_err()?;"
+rs,zed,singleton,1,// Doesn't make sense to scroll the alt screen,"if !self.last_content.mode.contains(TermMode::ALT_SCREEN) {
+                let scroll_lines = match self.drag_line_delta(e, region) {
+                    Some(value) => value,
+                    None => return,
+                };
+
+                self.events
+                    .push_back(InternalEvent::Scroll(AlacScroll::Delta(scroll_lines)));
+            }"
+rs,rust,singleton,1,// It will be unified during the upvar inference phase (`upvar.rs`),"None => self.next_ty_var(expr_span),"
+rs,rust,singleton,1,// Backup semantics enables opening directories as well as files.,opts.custom_flags(c::FILE_FLAG_BACKUP_SEMANTICS);
+rs,uv,singleton,1,// Populate the Git resolver.,"for ResolvedRepositoryReference { reference, sha } in git {
+        debug!(""Inserting Git reference into resolver: `{reference:?}` at `{sha}`"");
+        state.git().insert(reference, sha);
+    }"
+rs,rust,singleton,1,"// No substitution, this can only occur in type position.",sema . resolve_use_type_arg (name_ref)
+rs,uv,singleton,1,// Disallow `pylock.toml` files as constraints.,"if let Some(pylock_toml) = constraints.iter().find_map(|source| {
+            if let RequirementsSource::PylockToml(path) = source {
+                Some(path)
+            } else {
+                None
+            }
+        }) {
+            return Err(anyhow::anyhow!(
+                ""Cannot use `{}` as a constraint file"",
+                pylock_toml.user_display()
+            ));
+        }"
+rs,rust,singleton,1,"// See algo::ancestors_at_offset, which uses the same approach",. kmerge_by
+rs,rust,singleton,1,// TODO: when https://github.com/rust-lang/miri/issues/3730 is fixed this should use its notion of tid/pid,"let thread_id = match pid {
+                    0 => this.active_thread(),
+                    _ =>
+                        throw_unsup_format!(
+                            ""`sched_setaffinity` is only supported with a pid of 0 (indicating the current thread)""
+                        ),
+                };"
+rs,zed,inline,1,// visible screen request already invalidated the entries,","
+rs,rustdesk,singleton,1,// executable,let executable = String::from_utf8_lossy(&BIN_DATA[base..]).to_string();
+rs,zed,singleton,1,// TODO based on grep.app results it seems that vscode supports whitespace-splitting this field (ugh),"let definition = DebugScenario {
+            label,
+            build: None,
+            request: match self.request {
+                Request::Launch => {
+                    let cwd = self.cwd.map(|cwd| PathBuf::from(replacer.replace(&cwd)));
+                    let program = self.program.ok_or_else(|| {
+                        anyhow!(""vscode debug launch configuration does not define a program"")
+                    })?;
+                    let program = replacer.replace(&program);
+                    let args = self
+                        .args
+                        .into_iter()
+                        .map(|arg| replacer.replace(&arg))
+                        .collect();
+                    let env = self
+                        .env
+                        .into_iter()
+                        .filter_map(|(k, v)| v.map(|v| (k, v)))
+                        .collect();
+                    DebugRequest::Launch(LaunchRequest {
+                        program,
+                        cwd,
+                        args,
+                        env,
+                    })
+                    .into()
+                }
+                Request::Attach => DebugRequest::Attach(AttachRequest { process_id: None }).into(),
+            },
+            adapter: task_type_to_adapter_name(&self.r#type),
+            // TODO host?
+            tcp_connection: self.port.map(|port| TcpArgumentsTemplate {
+                port: Some(port),
+                host: None,
+                timeout: None,
+            }),
+            stop_on_entry: self.stop_on_entry,
+            // TODO
+            initialize_args: None,
+        };"
+rs,zed,singleton,1,"// We don't log an error, because ""not signed in"" is also an error.",let _ = task.await;
+rs,rust,singleton,1,// Transform `&mut x | ... | &mut y` into `&mut (x | y)`.,"Ref(target, Mutability::Mut) => extend_with_matching(
+            target, start, alternatives,
+            |k| matches!(k, Ref(_, Mutability::Mut)),
+            |k| always_pat!(k, Ref(p, _) => p),
+        ),"
+rs,rust,singleton,1,// Fixes from `cargo check`.,"for fix in snap
+        .check_fixes
+        .iter()
+        .flat_map(|it| it.values())
+        .filter_map(|it| it.get(&frange.file_id))
+        .flatten()
+    {
+        // FIXME: this mapping is awkward and shouldn't exist. Refactor
+        // `snap.check_fixes` to not convert to LSP prematurely.
+        let intersect_fix_range = fix
+            .ranges
+            .iter()
+            .copied()
+            .filter_map(|range| from_proto::text_range(&line_index, range).ok())
+            .any(|fix_range| fix_range.intersect(frange.range).is_some());
+        if intersect_fix_range {
+            res.push(fix.action.clone());
+        }
+    }"
+rs,deno,singleton,1,// Noop,}
+rs,rust,block,2,"// satisfy the requirements of align_of_val_raw; this is an implementation
+// detail of the language that must not be relied upon outside of std.",unsafe { data_offset_align(align_of_val_raw(ptr)) }
+rs,rust,singleton,1,// note: unable to trigger `Subslice` kind in tests,"ProjectionKind::Subslice |
+                        // Doesn't have surface syntax. Only occurs in patterns.
+                        ProjectionKind::OpaqueCast => (),"
+rs,rust,singleton,1,// - the stack can create recursion.,"if result.is_stack_dependent() {
+            return;
+        }"
+rs,rust,block,30,"// On windows these fall-back to platform native calling convention (C) when the
+// architecture is not supported.
+//
+// This is I believe a historical accident that has occurred as part of Microsoft
+// striving to allow most of the code to ""just"" compile when support for 64-bit x86
+// was added and then later again, when support for ARM architectures was added.
+//
+// This is well documented across MSDN. Support for this in Rust has been added in
+// #54576. This makes much more sense in context of Microsoft's C++ than it does in
+// Rust, but there isn't much leeway remaining here to change it back at the time this
+// comment has been written.
+//
+// Following are the relevant excerpts from the MSDN documentation.
+//
+// > The __vectorcall calling convention is only supported in native code on x86 and
+// x64 processors that include Streaming SIMD Extensions 2 (SSE2) and above.
+// > ...
+// > On ARM machines, __vectorcall is accepted and ignored by the compiler.
+//
+// -- https://docs.microsoft.com/en-us/cpp/cpp/vectorcall?view=msvc-160
+//
+// > On ARM and x64 processors, __stdcall is accepted and ignored by the compiler;
+//
+// -- https://docs.microsoft.com/en-us/cpp/cpp/stdcall?view=msvc-160
+//
+// > In most cases, keywords or compiler switches that specify an unsupported
+// > convention on a particular platform are ignored, and the platform default
+// > convention is used.
+//
+// -- https://docs.microsoft.com/en-us/cpp/cpp/argument-passing-and-naming-conventions","Stdcall { .. } | Fastcall { .. } | Vectorcall { .. } if self.is_like_windows => true,"
+rs,rust,block,9,"// can legitimately occur as a contextual keyword
+// in 2015 code denoting its 2018 meaning, and we
+// do not want rustfix to inject bugs into working
+// code by rewriting such occurrences.
+//
+// But if we see `dyn` outside of a macro, we know
+// its precise role in the parsed AST and thus are
+// assured this is truly an attempt to use it as
+// an identifier.","kw::Dyn if !under_macro => (KEYWORD_IDENTS_2018, Edition::Edition2018),"
+rs,sway,singleton,1,// TODO: Implement visiting `associated consts`.,}
+rs,rust,singleton,1,// nth(n) skips n+1,"if self.iter.nth(n - 1).is_none() {
+                return try { init };
+            }"
+rs,rust,block,4,"// Remove transitively reverse-implied features.
+// We don't care about the order in `features` since the only thing we use it for is the
+// `features.contains` below.",#[allow(rustc::potential_query_instability)]
+rs,rustdesk,block,18,"// The following code causes a bug.
+// The virtual display cannot be added when there's no session(eg. when exiting from RDP).
+// Because `crate::platform::desktop_changed()` always returns true at that time.
+//
+// The code only solves a rare case:
+// 1. The control side is connecting.
+// 2. The windows session is switching, no displays are detected, but they're there.
+// Then the controlled side plugs in a virtual display for ""headless"".
+//
+// No need to do the following check. But the code is kept here for marking the issue.
+// If there're someones reporting the issue, we may add a better check by waiting for a while. (switching session).
+// But I don't think it's good to add the timeout check without any issue.
+//
+// If is switching session, no displays may be detected.
+// if displays.is_empty() && crate::platform::desktop_changed() {
+//     return Ok(displays);
+// }",let no_displays_v = no_displays(&displays);
+rs,rust,singleton,1,// We skip all the work if the bit is already set.,"let (word_index, mask) = chunk_word_index_and_mask(elem);"
+rs,rust,singleton,1,// NOTE: make `dist` part of the URL because that's how it's stored in src/stage0,"(dist_server, format!(""dist/{key}/{filename}""), true)"
+rs,rust,block,2,"// Floating point value is NaN (flagged with INVALID_OP) or outside the range
+// of values of the integer type (flagged with OVERFLOW or UNDERFLOW).",interp_ok(None)
+rs,rust,singleton,1,"// this slows down rust-analyzer by quite a bit unfortunately, so enabling this is currently not worth it","let _variant_id_to_fields = |id: VariantId| {
+        let variant_data = &id.variant_data(db);
+        let fields = if variant_data.fields().is_empty() {
+            vec![]
+        } else {
+            let field_types = db.field_types(id);
+            variant_data
+                .fields()
+                .iter()
+                .map(|(idx, _)| field_types[idx].clone().substitute(Interner, &bound_vars_subst))
+                .filter(|it| !it.contains_unknown())
+                .collect()
+        };
+        rust_ir::AdtVariantDatum { fields }
+    };"
+rs,alacritty,singleton,1,// Clamp selection to within grid boundaries.,"if end.point.line < term.topmost_line() {
+            return None;
+        }"
+rs,rustdesk,block,3,"// A big read lock is needed to prevent race conditions.
+// Loading plugin list may be slow.
+// Users may call uninstall plugin in the middle.",let plugin_infos = super::plugins::get_plugin_infos();
+rs,rust,block,11,"// - E0433 failed to resolve: use of undeclared type or module `{}`
+//
+// The first one is emitted for paths in type-position, and the
+// latter one - for paths in expression-position.
+//
+// Thus (since we're in expression-position at this point), not to
+// confuse the user, we want to keep the *message* from E0433 (so
+// `parent_err`), but we want *hints* from E0412 (so `err`).
+//
+// And that's what happens below - we're just mixing both messages
+// into a single one.","let mut parent_err = this.r.into_struct_error(parent_err.span, parent_err.node);"
+rs,rust,singleton,1,// Print just the sysroot and nothing else to stdout; this way we do not need any escaping.,"println!(""{}"", sysroot_dir.display());"
+rs,rust,singleton,1,// Abort if public function/method or closure.,"match fn_kind {
+            FnKind::ItemFn(..) | FnKind::Method(..) => {
+                if self.avoid_breaking_exported_api && cx.effective_visibilities.is_exported(def_id) {
+                    return;
+                }
+            },
+            FnKind::Closure => return,
+        }"
+rs,sway,singleton,1,"// We now try to type check it again, this time with the type annotation.","ctx.by_ref()
+                .with_help_text(
+                    ""Function application argument type must match function parameter type."",
+                )
+                .with_type_annotation(param.type_argument.type_id())"
+rs,rust,block,2,"// Ensure there are no symbolic links in the tarball. In particular,
+// rustup-toolchain-install-master and most versions of Windows can't handle symbolic links.",let decompressed_output = self.temp_dir.join(&package_name);
+rs,rust,singleton,1,// SAFETY: the caller must uphold the safety contract for `offset_from`.,unsafe { self.cast::<u8>().offset_from(origin.cast::<u8>()) }
+rs,rust,singleton,2,// the structure like it is.,let snapshot = self.snapshot();
+rs,rust,block,3,"// to have their crate ID invalidated, because they stay on the same root file and
+// they're dependencies of everything else, so if some collision miraculously occurs
+// we will resolve it by disambiguating the other crate.","let skip = dep.is_sysroot()
+                    && match dep.crate_id.data(self.db).origin {
+                        CrateOrigin::Lang(LangCrateOrigin::Core) => crate_data.no_core,
+                        CrateOrigin::Lang(LangCrateOrigin::Std) => crate_data.no_std,
+                        _ => false,
+                    };"
+rs,rust,block,4,"// Auto-vectorization for this check is a bit fragile, sum and comparing against the chunk
+// size gives the best result, specifically a pmovmsk instruction on x86.
+// See https://github.com/llvm/llvm-project/issues/96395 for why llvm currently does not
+// currently recognize other similar idioms.","if is_ascii.iter().map(|x| *x as u8).sum::<u8>() as usize != N {
+            break;
+        }"
+rs,rust,block,24,"//
+// 1. Any hygiene information associated with identifier of
+// a proc macro (e.g. `#[proc_macro] pub fn $name`) will be lost.
+// Since proc-macros can only be invoked from a different crate,
+// real code should never need to care about this.
+//
+// 2. Using `Span::def_site` or `Span::mixed_site` will not
+// include any hygiene information associated with the definition
+// site. This means that a proc-macro cannot emit a `$crate`
+// identifier which resolves to one of its dependencies,
+// which also should never come up in practice.
+//
+// Additionally, this affects `Span::parent`, and any other
+// span inspection APIs that would otherwise allow traversing
+// the `SyntaxContexts` associated with a span.
+//
+// None of these user-visible effects should result in any
+// cross-crate inconsistencies (getting one behavior in the same
+// crate, and a different behavior in another crate) due to the
+// limited surface that proc-macros can expose.
+//
+// IMPORTANT: If this is ever changed, be sure to update
+// `rustc_span::hygiene::raw_encode_expn_id` to handle
+// encoding `ExpnData` for proc-macro crates.",let ctxt = if s.is_proc_macro { SyntaxContext::root() } else { self.ctxt };
+rs,zed,singleton,1,"// if only one entry was dragged and it was disambiguated, open the rename editor","if item_count == 1 && disambiguation_range . is_some () {
+                                    project_panel.rename_impl(disambiguation_range, window, cx);
+                                }"
+rs,deno,block,2,"// so we instead hardcode a plausible value. This value matches
+// what the mach kernel will report when running Rosetta apps.",cpu_speed = 2_400_000_000;
+rs,rust,block,4,"// This ensures that we only return events that we are interested. The FD might have been closed since
+// the event was generated, in which case we are not interested anymore.
+// When a file description is fully closed, it gets removed from `machine.epoll_interests`,
+// so we skip events whose FD is not in that map anymore.","if ecx.machine.epoll_interests.get_epoll_interest(epoll_key.0).is_some() {
+            return Some(epoll_event_instance);
+        }"
+rs,rust,block,3,"// In the new solver, we can just instantiate this eagerly
+// with the witness. This will ensure that goals that don't need
+// to stall on interior types will get processed eagerly.","let interior = if self.next_trait_solver() {
+                    Ty::new_coroutine_witness(tcx, expr_def_id.to_def_id(), parent_args)
+                } else {
+                    self.next_ty_var(expr_span)
+                };"
+rs,rust,block,2,"// If the mapping is a branch region, print both of its arms
+// in resolved form (even if they aren't expressions).","MappingKind::Branch { r#true, r#false }
+                    | MappingKind::MCDCBranch { r#true, r#false, .. } => {
+                        println!(""    true  = {}"", expression_resolver.format_term(r#true));
+                        println!(""    false = {}"", expression_resolver.format_term(r#false));
+                    }"
+rs,zed,singleton,1,// 'True' colors,"terminal::alacritty_terminal::vte::ansi::Color::Spec(rgb) => {
+            terminal::rgba_color(rgb.r, rgb.g, rgb.b)
+        }"
+rs,rust,block,7,"// borrows, so we conservatively assume that all borrowed locals are live until
+// we find a StorageDead statement referencing the locals.
+// To do this we just union our `liveness` result with `borrowed_locals`, which
+// contains all the locals which has been borrowed before this suspension point.
+// If a borrow is converted to a raw reference, we must also assume that it lives
+// forever. Note that the final liveness is still bounded by the storage liveness
+// of the local, which happens using the `intersect` operation below.",borrowed_locals_cursor2.seek_before_primary_effect(loc);
+rs,rust,inline,1,"// no: `auto::b`, yes: `auto trait X { .. }`","self.is_kw_followed_by_ident(kw::Union) // no: `union::b`, yes: `union U { .. }`
+        || self.is_reuse_path_item()
+        || self.check_auto_or_unsafe_trait_item()"
+rs,rust,block,4,"// flushed the buffer to ensure that there is. In the latter case, we know that there
+// is because flushing ensured that our entire buffer is spare capacity, and we entered
+// this block because the input buffer length is less than that capacity. In either
+// case, it's safe to write the input buffer to our buffer.","unsafe {
+                self.write_to_buffer_unchecked(buf);
+            }"
+rs,rust,block,5,"// Note that we don't need to test if the weak counter is locked because there
+// are no such operations like `Arc::get_mut` or `Arc::make_mut` that will lock
+// the weak counter.
+//
+// SAFETY: This pointer was allocated at creation time so we know it is valid.","let old_size = unsafe { (*this.ptr.as_ptr()).weak.fetch_add(1, Relaxed) };"
+rs,rust,block,2,"// Remove ending semicolons and any whitespace ' ' in between.
+// Without `return`, the suggestion might not compile if the semicolon is retained","if let Some(semi_span) = stmt.span.trim_start(semi_expr.span) {
+                        let semi_span_to_remove =
+                            span_find_starting_semi(cx.sess().source_map(), semi_span.with_hi(sp.hi()));
+                        semi_spans.push(semi_span_to_remove);
+                    }"
+rs,zed,singleton,1,// This code relies on reusing allocations from the Vec<_> - at the time of writing .flatten() prevents them.,#[allow(clippy::filter_map_identity)]
+rs,rust,block,5,"// Make sure we get rerun when the git commit changes.
+// We want to watch two files: HEAD, which tracks which branch we are on,
+// and the file for that branch that tracks which commit is checked out.
+// First, find the `HEAD` file. This should work even with worktrees.","let git_head_file = PathBuf::from(get_output(""git"", &[""rev-parse"", ""--git-path"", ""HEAD""])?);"
+rs,sway,block,2,"// Again, we trust the `size` method called on non-aggregate types
+// and calculate the struct size on our own.","let struct_size = first_field_ty.size(context).in_bytes_aligned()
+                        + second_field_type.size(context).in_bytes_aligned();"
+rs,rust,singleton,1,// SAFETY: `Searcher` is known to return valid indices.,unsafe { Some(haystack.get_unchecked(..start)) }
+rs,sway,singleton,1,// TODO: This is the workaround if `expr` is a reference.,"write!(formatted_code, ""{}"", AmpersandToken::AS_STR)?;"
+rs,rust,singleton,1,// Public items are visible everywhere.,"Visibility::Public => true,"
+rs,rust,block,10,"// at the start of the function. But that doesn't work so well for
+// immutable variables defined in a loop:
+//     loop { let x; x = 5; }
+// because the ""assignment"" loops back around and generates an error.
+//
+// So now we just check that variables defined w/o an
+// initializer are not live at the point of their
+// initialization, which is mildly more complex than checking
+// once at the func header but otherwise equivalent.","if let Some(els) = local.els {
+                    // Eventually, `let pat: ty = init else { els };` is mostly equivalent to
+                    // `let (bindings, ...) = match init { pat => (bindings, ...), _ => els };`
+                    // except that extended lifetime applies at the `init` location.
+                    //
+                    //       (e)
+                    //        |
+                    //        v
+                    //      (expr)
+                    //      /   \
+                    //     |     |
+                    //     v     v
+                    // bindings  els
+                    //     |
+                    //     v
+                    // ( succ )
+                    //
+                    if let Some(init) = local.init {
+                        let else_ln = self.propagate_through_block(els, succ);
+                        let ln = self.live_node(local.hir_id, local.span);
+                        self.init_from_succ(ln, succ);
+                        self.merge_from_succ(ln, else_ln);
+                        let succ = self.propagate_through_expr(init, ln);
+                        self.define_bindings_in_pat(local.pat, succ)
+                    } else {
+                        span_bug!(
+                            stmt.span,
+                            ""variable is uninitialized but an unexpected else branch is found""
+                        )
+                    }
+                } else {
+                    let succ = self.propagate_through_opt_expr(local.init, succ);
+                    self.define_bindings_in_pat(local.pat, succ)
+                }"
+rs,rust,singleton,1,// Parse an unqualified path,"(None, self.parse_path(PathStyle::Pat)?)"
+rs,rust,block,2,"// Wrap the pattern in a marker node to indicate that it is the result of lowering a
+// constant. This is used for diagnostics, and for unsafety checking of inline const blocks.","let kind = PatKind::ExpandedConstant { subpattern: inlined_const_as_pat, def_id: uv.def };"
+rs,rust,singleton,1,// Note that different arguments might have different target feature requirements.,"match arg {
+                    // YIELD
+                    1 => {
+                        this.expect_target_feature_for_intrinsic(link_name, ""v6"")?;
+                        this.yield_active_thread();
+                    }
+                    _ => {
+                        throw_unsup_format!(""unsupported llvm.arm.hint argument {}"", arg);
+                    }
+                }"
+rs,rust,singleton,1,// Join the split lines.,in_split_line = None;
+rs,uv,singleton,1,// Create the `pyproject.toml`,"let mut pyproject = pyproject_project(
+            name,
+            requires_python,
+            author.as_ref(),
+            description,
+            no_description,
+            no_readme,
+        );"
+rs,sway,inline,1,// Used just here for getting the three parsed elements.,#[allow(clippy::type_complexity)]
+rs,rust,block,2,"// If we couldn't figure out a type, just write 0,
+// which is encoded as `` ` `` (see RenderTypeId::write_to_string).","let has_missing = self
+            .inputs
+            .iter()
+            .chain(self.output.iter())
+            .any(|i| i.id.is_none() && i.generics.is_none());"
+rs,rustdesk,singleton,1,"// The default hostname is ""localhost"" which is a bit confusing","if hostname == ""localhost"" {
+                                    hostname = ""unknown"".to_owned();
+                                }"
+rs,rust,block,2,"// https://github.com/model-checking/kani and is not a performance
+// or maintenance issue for us.","DefKind::Closure => true,"
+ts,TypeScript,block,2,"// See GH#16030
+/** @internal */","export function getDeclarationFromName(name: Node): Declaration | undefined {
+    const parent = name.parent;
+    switch (name.kind) {
+        case SyntaxKind.StringLiteral:
+        case SyntaxKind.NoSubstitutionTemplateLiteral:
+        case SyntaxKind.NumericLiteral:
+            if (isComputedPropertyName(parent)) return parent.parent;
+            // falls through
+        case SyntaxKind.Identifier:
+            if (isDeclaration(parent)) {
+                return parent.name === name ? parent : undefined;
+            }
+            else if (isQualifiedName(parent)) {
+                const tag = parent.parent;
+                return isJSDocParameterTag(tag) && tag.name === parent ? tag : undefined;
+            }
+            else {
+                const binExp = parent.parent;
+                return isBinaryExpression(binExp) &&
+                        getAssignmentDeclarationKind(binExp) !== AssignmentDeclarationKind.None &&
+                        ((binExp.left as BindableStaticNameExpression).symbol || binExp.symbol) &&
+                        getNameOfDeclaration(binExp) === name
+                    ? binExp
+                    : undefined;
+            }
+        case SyntaxKind.PrivateIdentifier:
+            return isDeclaration(parent) && parent.name === name ? parent : undefined;
+        default:
+            return undefined;
+    }
+}"
+ts,n8n,singleton,1,"// If there is binary data and the node option permits it, add a binary message",const hasBinaryData = ctx.getInputData()?.[itemIndex]?.binary !== undefined;
+ts,TypeScript,block,1,/*nameType*/,"undefined ,"
+ts,n8n,singleton,1,// ----------------------------------------,"const agentId = this.getNodeParameter('agentId', i);"
+ts,TypeScript,singleton,1,// of it here to be complete.,"return parseCallExpressionRest(pos, expression);"
+ts,TypeScript,block,1,/** @internal */,"export function isLiteralExpressionOfObject(node: Node): boolean {
+    switch (node.kind) {
+        case SyntaxKind.ObjectLiteralExpression:
+        case SyntaxKind.ArrayLiteralExpression:
+        case SyntaxKind.RegularExpressionLiteral:
+        case SyntaxKind.FunctionExpression:
+        case SyntaxKind.ClassExpression:
+            return true;
+    }
+    return false;
+}"
+ts,vscode,singleton,1,// this step.,let windowToUseForFiles: ICodeWindow | undefined = undefined;
+ts,n8n,singleton,1,// Create the new table,"await createTable('user_api_keys')
+			.withColumns(
+				column('id').varchar(36).primary,
+				column('userId').uuid.notNull,
+				column('label').varchar(100).notNull,
+				column('apiKey').varchar().notNull,
+			)
+			.withForeignKey('userId', {
+				tableName: 'user',
+				columnName: 'id',
+				onDelete: 'CASCADE',
+			})
+			.withIndexOn(['userId', 'label'], true)
+			.withIndexOn(['apiKey'], true).withTimestamps;"
+ts,n8n,block,5,"// ----------------------------------
+//         team: get
+// ----------------------------------
+// https://developer.lemlist.com/#team","responseData = await lemlistApiRequest.call(this, 'GET', '/team');"
+ts,TypeScript,block,4,"//
+// This handles cases where we may encounter both <file>.ts and
+// <file>.d.ts (or <file>.js if ""allowJs"" is enabled) in the same
+// directory when they are compilation outputs.","if (hasFileWithHigherPriorityExtension(file, literalFileMap, wildcardFileMap, supportedExtensions, keyMapper)) {
+                continue;
+            }"
+ts,angular,singleton,1,// TODO: use reduce,samples.forEach((x) => (total += x));
+ts,TypeScript,singleton,1,// when b is deleted - we delete it,return leadingTriviaOption === LeadingTriviaOption.IncludeAll ? fullStart : start;
+ts,n8n,singleton,1,// Set custom execution data (`$execution.customData`) if sent,"if (resultData.customData) {
+				Object.entries(resultData.customData).forEach(([k, v]) => {
+					if (!runExecutionData.resultData.metadata) {
+						runExecutionData.resultData.metadata = {};
+					}
+					runExecutionData.resultData.metadata[k] = v;
+				});
+			}"
+ts,vite,inline,1,"// If `experimental.renderBuiltUrl` is used, the dependencies might be relative to the current chunk.",?
+ts,TypeScript,block,2,"// If there is changeSet with --outFile, cannot copy semantic diagnsotics or emitDiagnostics
+// as they all need to be calculated again all together since we dont know whats the affected file set because of the way d.ts works","if (outFilePath && state.changedFilesSet.size) {
+            canCopySemanticDiagnostics = false;
+            canCopyEmitDiagnostics = false;
+        }"
+ts,vite,singleton,1,// Replace __VITE_PUBLIC_ASSET__5aA0Ddc0__ with absolute paths,"const publicAssetUrlMap = publicAssetUrlCache.get(
+    environment.getTopLevelConfig(),
+  )!"
+ts,vscode,inline,1,// this is one of the few supported actions when aux window has focus,{
+ts,vscode,singleton,1,// clear the memento and cache,this._clear();
+ts,vscode,block,1,/** @description sound enabled */,const setting = this._signalConfigValue.get(arg.signal).read(reader);
+ts,vscode,singleton,1,// Use primary capabilities as main capabilities...,let capabilities = this.primary.capabilities;
+ts,vscode,singleton,1,// one or more regexps aren't supported,return text;
+ts,vscode,inline,1,/** Visual viewport */,window.visualViewport
+ts,angular,block,1,/** Added for readability when accessing stable property names. */,"export function setIsReplay(eventInfo: EventInfo, replay: boolean) {
+  eventInfo.eirp = replay;
+}"
+ts,TypeScript,inline,1,/*allowDecorators*/,","
+ts,angular,singleton,1,"// Create the main defer op, and ops for all secondary views.",const deferXref = unit.job.allocateXrefId();
+ts,vscode,inline,1,// only supported on macOS,return;
+ts,angular,block,2,"// In case of errors, when the configurable flag was likely set by rewriteDescriptor(),
+// let's retry with the original flag value","if (typeof originalConfigurableFlag == 'undefined') {
+        delete desc.configurable;
+      } else {
+        desc.configurable = originalConfigurableFlag;
+      }"
+ts,TypeScript,singleton,1,// Prevent cascading error by short-circuit,return checkGrammarModifiers(node) || checkGrammarIndexSignatureParameters(node);
+ts,TypeScript,singleton,1,//      set x(value) { this.#x = value; },const commentRange = getCommentRange(node);
+ts,TypeScript,block,15,"// So, we check for the following specific case:
+//
+//      name.
+//      identifierOrKeyword identifierNameOrKeyword
+//
+// Note: the newlines are important here.  For example, if that above code
+// were rewritten into:
+//
+//      name.identifierOrKeyword
+//      identifierNameOrKeyword
+//
+// Then we would consider it valid.  That's because ASI would take effect and
+// the code would be implicitly: ""name.identifierOrKeyword; identifierNameOrKeyword"".
+// In the first case though, ASI will not take effect because there is not a
+// line terminator after the identifier or keyword.","if (scanner.hasPrecedingLineBreak() && tokenIsIdentifierOrKeyword(token())) {
+            const matchesPattern = lookAhead(nextTokenIsIdentifierOrKeywordOnSameLine);
+
+            if (matchesPattern) {
+                // Report that we need an identifier.  However, report it right after the dot,
+                // and not on the next token.  This is because the next token might actually
+                // be an identifier and the error would be quite confusing.
+                return createMissingNode<Identifier>(SyntaxKind.Identifier, /*reportAtCurrentPosition*/ true, Diagnostics.Identifier_expected);
+            }
+        }"
+ts,TypeScript,singleton,1,"// fs.writeFileSync(testfilePath, newfile);",}
+ts,TypeScript,block,2,"// We only call this for union target types when we're attempting to do excess property checking - in those cases, we want to get _all possible props_
+// from the target union, across all members",const properties = getPropertiesOfType(target);
+ts,TypeScript,block,3,"// reveal the reason).
+// We can switch on `reportErrors` here, since varianceCheckFailed guarantees we return `False`,
+// we can return `False` early here to skip calculating the structural error message we don't need.","if (varianceCheckFailed && !(reportErrors && some(variances, v => (v & VarianceFlags.VarianceMask) === VarianceFlags.Invariant))) {
+                        return Ternary.False;
+                    }"
+ts,TypeScript,inline,1,/*ignoreThisTypes*/,","
+ts,vscode,block,3,"// This helps to build the auxiliary window in another component
+// in the `onWillLayout` phase and then let other compoments
+// react when the overall layout has finished in `onDidLayout`.","const dimension = getClientArea(this.window.document.body, DEFAULT_AUX_WINDOW_DIMENSIONS, this.container);"
+ts,vscode,singleton,1,// Add sync ignored text,"if (cachedSyncIgnoredSettingsSet.has(element.setting.key)) {
+		ariaLabelSections.push(localize('syncIgnoredAriaLabel', ""Setting ignored during sync""));
+	}"
+ts,TypeScript,inline,1,/* isSingleQuote */,","
+ts,angular,singleton,1,// a popstate event. The pop state event will always ignore anchor scrolling.,"if (e.position) {
+        if (this.options.scrollPositionRestoration === 'top') {
+          this.viewportScroller.scrollToPosition([0, 0]);
+        } else if (this.options.scrollPositionRestoration === 'enabled') {
+          this.viewportScroller.scrollToPosition(e.position);
+        }
+        // imperative navigation ""forward""
+      } else {
+        if (e.anchor && this.options.anchorScrolling === 'enabled') {
+          this.viewportScroller.scrollToAnchor(e.anchor);
+        } else if (this.options.scrollPositionRestoration !== 'disabled') {
+          this.viewportScroller.scrollToPosition([0, 0]);
+        }
+      }"
+ts,TypeScript,singleton,1,// Dont check output timestamps if we have buildinfo telling us output is uptodate,"if (!isIncremental) {
+        // Collect the expected outputs of this project
+        const outputs = getAllProjectOutputs(project, !host.useCaseSensitiveFileNames());
+        const outputTimeStampMap = getOutputTimeStampMap(state, resolvedPath);
+        for (const output of outputs) {
+            if (output === buildInfoPath) continue;
+            const path = toPath(state, output);
+            // Output is missing; can stop checking
+            let outputTime = outputTimeStampMap?.get(path);
+            if (!outputTime) {
+                outputTime = ts_getModifiedTime(state.host, output);
+                outputTimeStampMap?.set(path, outputTime);
+            }
+
+            if (outputTime === missingFileModifiedTime) {
+                return {
+                    type: UpToDateStatusType.OutputMissing,
+                    missingOutputFileName: output,
+                };
+            }
+
+            // If an output is older than the newest input, we can stop checking
+            if (outputTime < newestInputFileTime) {
+                return {
+                    type: UpToDateStatusType.OutOfDateWithSelf,
+                    outOfDateOutputFileName: output,
+                    newerInputFileName: newestInputFileName,
+                };
+            }
+
+            // No need to get newestDeclarationFileContentChangedTime since thats needed only for composite projects
+            // And composite projects are the only ones that can be referenced
+            if (outputTime < oldestOutputFileTime) {
+                oldestOutputFileTime = outputTime;
+                oldestOutputFileName = output;
+            }
+        }
+    }"
+ts,TypeScript,inline,1,/*verbosityLevel*/,","
+ts,vscode,block,2,"// Consider a notification as unread as long as it only
+// appeared as toast and not in the notification center","if (!this.isNotificationsCenterVisible) {
+			if (e.kind === NotificationChangeType.ADD) {
+				this.newNotificationsCount++;
+			} else if (e.kind === NotificationChangeType.REMOVE && this.newNotificationsCount > 0) {
+				this.newNotificationsCount--;
+			}
+		}"
+ts,n8n,singleton,1,// Set only if value got found,"if (returnDefaults) {
+					// Set also when it has the default value
+					if (collectionValues === undefined) {
+						nodeParameters[nodeProperties.name] = deepCopy(nodeProperties.default);
+					} else {
+						nodeParameters[nodeProperties.name] = collectionValues;
+					}
+					nodeParametersFull[nodeProperties.name] = nodeParameters[nodeProperties.name];
+				} else if (collectionValues !== nodeProperties.default) {
+					// Set only if values got found and it is not the default
+					nodeParameters[nodeProperties.name] = collectionValues;
+					nodeParametersFull[nodeProperties.name] = nodeParameters[nodeProperties.name];
+				}"
+ts,TypeScript,inline,1,/*extension*/,","
+ts,TypeScript,block,12,"// given:
+//
+//   export default expr;
+//
+// produces:
+//
+//   // top level
+//   var default_1;
+//   export { default_1 as default };
+//
+//   // body
+//   default_1 = expr;","defaultExportBinding = factory.createUniqueName(""_default"", GeneratedIdentifierFlags.ReservedInNestedScopes | GeneratedIdentifierFlags.FileLevel | GeneratedIdentifierFlags.Optimistic);"
+ts,core,singleton,1,// always prefix since compiler-ssr doesn't have size concern,"prefixIdentifiers: true ,"
+ts,vscode,block,2,"// Case modification of string replacements, patterned after Boost, but only applied
+// to the replacement text, not subsequent content.",case CharCode.u:
+ts,TypeScript,inline,1,/*startNode*/,","
+ts,vscode,singleton,1,// reveal the cell into view first,"const range = { start: index, end: index + 1 };"
+ts,TypeScript,block,6,"//
+//   let obj: { a: { x: string } } & { c: number } = { a: { x: 'hello', y: 2 }, c: 5 };  // Nested excess property
+//
+//   declare let wrong: { a: { y: string } };
+//   let weak: { a?: { x?: number } } & { c?: string } = wrong;  // Nested weak object type
+//","if (
+                    result && !(intersectionState & IntersectionState.Target) && target.flags & TypeFlags.Intersection &&
+                    !isGenericObjectType(target) && source.flags & (TypeFlags.Object | TypeFlags.Intersection)
+                ) {
+                    result &= propertiesRelatedTo(source, target, reportErrors, /*excludedProperties*/ undefined, /*optionalsOnly*/ false, IntersectionState.None);
+                    if (result && isObjectLiteralType(source) && getObjectFlags(source) & ObjectFlags.FreshLiteral) {
+                        result &= indexSignaturesRelatedTo(source, target, /*sourceIsPrimitive*/ false, reportErrors, IntersectionState.None);
+                    }
+                }
+                // When the source is an intersection we need an extra check of any optional properties in the target to
+                // detect possible mismatched property types. For example:
+                //
+                //   function foo<T extends object>(x: { a?: string }, y: T & { a: boolean }) {
+                //     x = y;  // Mismatched property in source intersection
+                //   }
+                //
+                else if (
+                    result && isNonGenericObjectType(target) && !isArrayOrTupleType(target) &&
+                    source.flags & TypeFlags.Intersection && getApparentType(source).flags & TypeFlags.StructuredType &&
+                    !some((source as IntersectionType).types, t => t === target || !!(getObjectFlags(t) & ObjectFlags.NonInferrableType))
+                ) {
+                    result &= propertiesRelatedTo(source, target, reportErrors, /*excludedProperties*/ undefined, /*optionalsOnly*/ true, intersectionState);
+                }"
+ts,TypeScript,block,10,"//      return __awaiter(this, arguments, Promise, function *() {
+//          [_super.a, _super.b] = yield ar;
+//      });
+//  }
+//  ...
+//
+// Creating an object that has getter and setters instead of just an accessor function is required for destructuring assignments
+// as a call expression cannot be used as the target of a destructuring assignment while a property access can.
+//
+// For element access expressions (`super[x]`), we emit a generic helper that forwards the element access in both situations.","if (container.kind === SyntaxKind.MethodDeclaration && inAsyncFunction) {
+            if (isSuperProperty(node.parent) && isAssignmentTarget(node.parent)) {
+                getNodeLinks(container).flags |= NodeCheckFlags.MethodWithSuperPropertyAssignmentInAsync;
+            }
+            else {
+                getNodeLinks(container).flags |= NodeCheckFlags.MethodWithSuperPropertyAccessInAsync;
+            }
+        }"
+ts,vscode,block,2,"// revealing the top of the zone would push out the line we are interested in and
+// therefore we keep the line in the viewport",newScrollTop = lineBottom - editorHeight;
+ts,vscode,singleton,1,// Disable ArrowUp and ArrowDown behaviour in favor of list navigation,"template.toDispose.add(DOM.addStandardDisposableListener(template.inputBox.inputElement, DOM.EventType.KEY_DOWN, e => {
+			if (e.equals(KeyCode.UpArrow) || e.equals(KeyCode.DownArrow)) {
+				e.preventDefault();
+			}
+		}));"
+ts,TypeScript,block,5,"// Variables declared with 'const'
+// Get accessors without matching set accessors
+// Enum members
+// Object.defineProperty assignments with writable false or no setter
+// Unions and intersections of the above (unions and intersections eagerly set isReadonly on creation)","return !!(getCheckFlags(symbol) & CheckFlags.Readonly ||
+            symbol.flags & SymbolFlags.Property && getDeclarationModifierFlagsFromSymbol(symbol) & ModifierFlags.Readonly ||
+            symbol.flags & SymbolFlags.Variable && getDeclarationNodeFlagsFromSymbol(symbol) & NodeFlags.Constant ||
+            symbol.flags & SymbolFlags.Accessor && !(symbol.flags & SymbolFlags.SetAccessor) ||
+            symbol.flags & SymbolFlags.EnumMember ||
+            some(symbol.declarations, isReadonlyAssignmentDeclaration));"
+ts,TypeScript,block,1,/** @internal */,"export function getOptionsSyntaxByValue(optionsObject: ObjectLiteralExpression | undefined, name: string, value: string): StringLiteral | undefined {
+    return forEachOptionsSyntaxByName(optionsObject, name, property => isStringLiteral(property.initializer) && property.initializer.text === value ? property.initializer : undefined);
+}"
+ts,angular,singleton,1,// `keyCode` is an old DOM API.,(e as any).keyCode
+ts,n8n,singleton,1,// Send a REQUEST to prepare a register of a media image file,"const registerRequest = {
+								initializeUploadRequest: {
+									owner: authorUrn,
+								},
+							};"
+ts,TypeScript,block,9,"// exported only for tests
+/**
+ * getRangeToExtract takes a span inside a text file and returns either an expression or an array
+ * of statements representing the minimum set of nodes needed to extract the entire span. This
+ * process may fail, in which case a set of errors is returned instead. These errors are shown to
+ * users if they have the provideRefactorNotApplicableReason option set.
+ *
+ * @internal
+ */","export function getRangeToExtract(sourceFile: SourceFile, span: TextSpan, invoked = true): RangeToExtract {
+    const { length } = span;
+    if (length === 0 && !invoked) {
+        return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractEmpty)] };
+    }
+    const cursorRequest = length === 0 && invoked;
+
+    const startToken = findFirstNonJsxWhitespaceToken(sourceFile, span.start);
+    const endToken = findTokenOnLeftOfPosition(sourceFile, textSpanEnd(span));
+    /* If the refactoring command is invoked through a keyboard action it's safe to assume that the user is actively looking for
+    refactoring actions at the span location. As they may not know the exact range that will trigger a refactoring, we expand the
+    searched span to cover a real node range making it more likely that something useful will show up. */
+    const adjustedSpan = startToken && endToken && invoked ? getAdjustedSpanFromNodes(startToken, endToken, sourceFile) : span;
+
+    // Walk up starting from the the start position until we find a non-SourceFile node that subsumes the selected span.
+    // This may fail (e.g. you select two statements in the root of a source file)
+    const start = cursorRequest ? getExtractableParent(startToken) : getParentNodeInSpan(startToken, sourceFile, adjustedSpan);
+
+    // Do the same for the ending position
+    const end = cursorRequest ? start : getParentNodeInSpan(endToken, sourceFile, adjustedSpan);
+
+    // We'll modify these flags as we walk the tree to collect data
+    // about what things need to be done as part of the extraction.
+    let rangeFacts = RangeFacts.None;
+
+    let thisNode: Node | undefined;
+
+    if (!start || !end) {
+        // cannot find either start or end node
+        return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractRange)] };
+    }
+
+    if (start.flags & NodeFlags.JSDoc) {
+        return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractJSDoc)] };
+    }
+
+    if (start.parent !== end.parent) {
+        // start and end nodes belong to different subtrees
+        return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractRange)] };
+    }
+
+    if (start !== end) {
+        // start and end should be statements and parent should be either block or a source file
+        if (!isBlockLike(start.parent)) {
+            return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractRange)] };
+        }
+        const statements: Statement[] = [];
+        for (const statement of start.parent.statements) {
+            if (statement === start || statements.length) {
+                const errors = checkNode(statement);
+                if (errors) {
+                    return { errors };
+                }
+                statements.push(statement);
+            }
+            if (statement === end) {
+                break;
+            }
+        }
+
+        if (!statements.length) {
+            // https://github.com/Microsoft/TypeScript/issues/20559
+            // Ranges like [|case 1: break;|] will fail to populate `statements` because
+            // they will never find `start` in `start.parent.statements`.
+            // Consider: We could support ranges like [|case 1:|] by refining them to just
+            // the expression.
+            return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractRange)] };
+        }
+
+        return { targetRange: { range: statements, facts: rangeFacts, thisNode } };
+    }
+
+    if (isReturnStatement(start) && !start.expression) {
+        // Makes no sense to extract an expression-less return statement.
+        return { errors: [createFileDiagnostic(sourceFile, span.start, length, Messages.cannotExtractRange)] };
+    }
+
+    // We have a single node (start)
+    const node = refineNode(start);
+
+    const errors = checkRootNode(node) || checkNode(node);
+    if (errors) {
+        return { errors };
+    }
+    return { targetRange: { range: getStatementOrExpressionRange(node)!, facts: rangeFacts, thisNode } }; // TODO: GH#18217
+
+    /**
+     * Attempt to refine the extraction node (generally, by shrinking it) to produce better results.
+     * @param node The unrefined extraction node.
+     */
+    function refineNode(node: Node): Node {
+        if (isReturnStatement(node)) {
+            if (node.expression) {
+                return node.expression;
+            }
+        }
+        else if (isVariableStatement(node) || isVariableDeclarationList(node)) {
+            const declarations = isVariableStatement(node) ? node.declarationList.declarations : node.declarations;
+            let numInitializers = 0;
+            let lastInitializer: Expression | undefined;
+            for (const declaration of declarations) {
+                if (declaration.initializer) {
+                    numInitializers++;
+                    lastInitializer = declaration.initializer;
+                }
+            }
+            if (numInitializers === 1) {
+                return lastInitializer!;
+            }
+            // No special handling if there are multiple initializers.
+        }
+        else if (isVariableDeclaration(node)) {
+            if (node.initializer) {
+                return node.initializer;
+            }
+        }
+        return node;
+    }
+
+    function checkRootNode(node: Node): Diagnostic[] | undefined {
+        if (isIdentifier(isExpressionStatement(node) ? node.expression : node)) {
+            return [createDiagnosticForNode(node, Messages.cannotExtractIdentifier)];
+        }
+        return undefined;
+    }
+
+    function checkForStaticContext(nodeToCheck: Node, containingClass: Node) {
+        let current: Node = nodeToCheck;
+        while (current !== containingClass) {
+            if (current.kind === SyntaxKind.PropertyDeclaration) {
+                if (isStatic(current)) {
+                    rangeFacts |= RangeFacts.InStaticRegion;
+                }
+                break;
+            }
+            else if (current.kind === SyntaxKind.Parameter) {
+                const ctorOrMethod = getContainingFunction(current)!;
+                if (ctorOrMethod.kind === SyntaxKind.Constructor) {
+                    rangeFacts |= RangeFacts.InStaticRegion;
+                }
+                break;
+            }
+            else if (current.kind === SyntaxKind.MethodDeclaration) {
+                if (isStatic(current)) {
+                    rangeFacts |= RangeFacts.InStaticRegion;
+                }
+            }
+            current = current.parent;
+        }
+    }
+
+    // Verifies whether we can actually extract this node or not.
+    function checkNode(nodeToCheck: Node): Diagnostic[] | undefined {
+        const enum PermittedJumps {
+            None = 0,
+            Break = 1 << 0,
+            Continue = 1 << 1,
+            Return = 1 << 2,
+        }
+
+        // We believe it's true because the node is from the (unmodified) tree.
+        Debug.assert(nodeToCheck.pos <= nodeToCheck.end, ""This failure could trigger https://github.com/Microsoft/TypeScript/issues/20809 (1)"");
+
+        // For understanding how skipTrivia functioned:
+        Debug.assert(!positionIsSynthesized(nodeToCheck.pos), ""This failure could trigger https://github.com/Microsoft/TypeScript/issues/20809 (2)"");
+
+        if (!isStatement(nodeToCheck) && !(isExpressionNode(nodeToCheck) && isExtractableExpression(nodeToCheck)) && !isStringLiteralJsxAttribute(nodeToCheck)) {
+            return [createDiagnosticForNode(nodeToCheck, Messages.statementOrExpressionExpected)];
+        }
+
+        if (nodeToCheck.flags & NodeFlags.Ambient) {
+            return [createDiagnosticForNode(nodeToCheck, Messages.cannotExtractAmbientBlock)];
+        }
+
+        // If we're in a class, see whether we're in a static region (static property initializer, static method, class constructor parameter default)
+        const containingClass = getContainingClass(nodeToCheck);
+        if (containingClass) {
+            checkForStaticContext(nodeToCheck, containingClass);
+        }
+
+        let errors: Diagnostic[] | undefined;
+        let permittedJumps = PermittedJumps.Return;
+        let seenLabels: __String[];
+
+        visit(nodeToCheck);
+
+        if (rangeFacts & RangeFacts.UsesThis) {
+            const container = getThisContainer(nodeToCheck, /*includeArrowFunctions*/ false, /*includeClassComputedPropertyName*/ false);
+            if (
+                container.kind === SyntaxKind.FunctionDeclaration ||
+                (container.kind === SyntaxKind.MethodDeclaration && container.parent.kind === SyntaxKind.ObjectLiteralExpression) ||
+                container.kind === SyntaxKind.FunctionExpression
+            ) {
+                rangeFacts |= RangeFacts.UsesThisInFunction;
+            }
+        }
+
+        return errors;
+
+        function visit(node: Node) {
+            if (errors) {
+                // already found an error - can stop now
+                return true;
+            }
+
+            if (isDeclaration(node)) {
+                const declaringNode = (node.kind === SyntaxKind.VariableDeclaration) ? node.parent.parent : node;
+                if (hasSyntacticModifier(declaringNode, ModifierFlags.Export)) {
+                    // TODO: GH#18217 Silly to use `errors ||` since it's definitely not defined (see top of `visit`)
+                    // Also, if we're only pushing one error, just use `let error: Diagnostic | undefined`!
+                    // Also TODO: GH#19956
+                    (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractExportedEntity));
+                    return true;
+                }
+            }
+
+            // Some things can't be extracted in certain situations
+            switch (node.kind) {
+                case SyntaxKind.ImportDeclaration:
+                    (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractImport));
+                    return true;
+                case SyntaxKind.ExportAssignment:
+                    (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractExportedEntity));
+                    return true;
+                case SyntaxKind.SuperKeyword:
+                    // For a super *constructor call*, we have to be extracting the entire class,
+                    // but a super *method call* simply implies a 'this' reference
+                    if (node.parent.kind === SyntaxKind.CallExpression) {
+                        // Super constructor call
+                        const containingClass = getContainingClass(node);
+                        if (containingClass === undefined || containingClass.pos < span.start || containingClass.end >= (span.start + span.length)) {
+                            (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractSuper));
+                            return true;
+                        }
+                    }
+                    else {
+                        rangeFacts |= RangeFacts.UsesThis;
+                        thisNode = node;
+                    }
+                    break;
+                case SyntaxKind.ArrowFunction:
+                    // check if arrow function uses this
+                    forEachChild(node, function check(n) {
+                        if (isThis(n)) {
+                            rangeFacts |= RangeFacts.UsesThis;
+                            thisNode = node;
+                        }
+                        else if (isClassLike(n) || (isFunctionLike(n) && !isArrowFunction(n))) {
+                            return false;
+                        }
+                        else {
+                            forEachChild(n, check);
+                        }
+                    });
+                    // falls through
+                case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.FunctionDeclaration:
+                    if (isSourceFile(node.parent) && node.parent.externalModuleIndicator === undefined) {
+                        // You cannot extract global declarations
+                        (errors ||= []).push(createDiagnosticForNode(node, Messages.functionWillNotBeVisibleInTheNewScope));
+                    }
+                    // falls through
+                case SyntaxKind.ClassExpression:
+                case SyntaxKind.FunctionExpression:
+                case SyntaxKind.MethodDeclaration:
+                case SyntaxKind.Constructor:
+                case SyntaxKind.GetAccessor:
+                case SyntaxKind.SetAccessor:
+                    // do not dive into functions or classes
+                    return false;
+            }
+
+            const savedPermittedJumps = permittedJumps;
+            switch (node.kind) {
+                case SyntaxKind.IfStatement:
+                    permittedJumps &= ~PermittedJumps.Return;
+                    break;
+                case SyntaxKind.TryStatement:
+                    // forbid all jumps inside try blocks
+                    permittedJumps = PermittedJumps.None;
+                    break;
+                case SyntaxKind.Block:
+                    if (node.parent && node.parent.kind === SyntaxKind.TryStatement && (node.parent as TryStatement).finallyBlock === node) {
+                        // allow unconditional returns from finally blocks
+                        permittedJumps = PermittedJumps.Return;
+                    }
+                    break;
+                case SyntaxKind.DefaultClause:
+                case SyntaxKind.CaseClause:
+                    // allow unlabeled break inside case clauses
+                    permittedJumps |= PermittedJumps.Break;
+                    break;
+                default:
+                    if (isIterationStatement(node, /*lookInLabeledStatements*/ false)) {
+                        // allow unlabeled break/continue inside loops
+                        permittedJumps |= PermittedJumps.Break | PermittedJumps.Continue;
+                    }
+                    break;
+            }
+
+            switch (node.kind) {
+                case SyntaxKind.ThisType:
+                case SyntaxKind.ThisKeyword:
+                    rangeFacts |= RangeFacts.UsesThis;
+                    thisNode = node;
+                    break;
+                case SyntaxKind.LabeledStatement: {
+                    const label = (node as LabeledStatement).label;
+                    (seenLabels || (seenLabels = [])).push(label.escapedText);
+                    forEachChild(node, visit);
+                    seenLabels.pop();
+                    break;
+                }
+                case SyntaxKind.BreakStatement:
+                case SyntaxKind.ContinueStatement: {
+                    const label = (node as BreakStatement | ContinueStatement).label;
+                    if (label) {
+                        if (!contains(seenLabels, label.escapedText)) {
+                            // attempts to jump to label that is not in range to be extracted
+                            (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractRangeContainingLabeledBreakOrContinueStatementWithTargetOutsideOfTheRange));
+                        }
+                    }
+                    else {
+                        if (!(permittedJumps & (node.kind === SyntaxKind.BreakStatement ? PermittedJumps.Break : PermittedJumps.Continue))) {
+                            // attempt to break or continue in a forbidden context
+                            (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractRangeContainingConditionalBreakOrContinueStatements));
+                        }
+                    }
+                    break;
+                }
+                case SyntaxKind.AwaitExpression:
+                    rangeFacts |= RangeFacts.IsAsyncFunction;
+                    break;
+                case SyntaxKind.YieldExpression:
+                    rangeFacts |= RangeFacts.IsGenerator;
+                    break;
+                case SyntaxKind.ReturnStatement:
+                    if (permittedJumps & PermittedJumps.Return) {
+                        rangeFacts |= RangeFacts.HasReturn;
+                    }
+                    else {
+                        (errors ||= []).push(createDiagnosticForNode(node, Messages.cannotExtractRangeContainingConditionalReturnStatement));
+                    }
+                    break;
+                default:
+                    forEachChild(node, visit);
+                    break;
+            }
+
+            permittedJumps = savedPermittedJumps;
+        }
+    }
+}"
+ts,TypeScript,singleton,1,//      a + ++b --X--> a+++b,"rule(""SpaceAfterPostincrementWhenFollowedByAdd"", SyntaxKind.PlusPlusToken, SyntaxKind.PlusToken, [isNonJsxSameLineTokenContext, isBinaryOpContext], RuleAction.InsertSpace) ,"
+ts,angular,block,1,/** @docsNotRequired */,"readonly anchor: string | null ,"
+ts,vscode,block,3,"// Emit via interval: immediately when opening an auxiliary window,
+// it is possible that document focus has not yet changed, so we
+// poll for a while to ensure we catch the event.","if (isAuxiliaryWindow(window)) {
+				disposables.add(disposableWindowInterval(window, () => {
+					const hasFocus = window.document.hasFocus();
+					if (hasFocus) {
+						emitter.fire(windowId);
+					}
+
+					return hasFocus;
+				}, 100, 20));
+			}"
+ts,n8n,inline,1,// default to true if not specified,","
+ts,angular,singleton,1,// First attempt to let any custom resolution logic provide a translation for the given node.,const resolved = this.maybeResolve(ast);
+ts,angular,block,7,"// The emit of a component is affected if either of the following is true:
+//  1. The component used to be remotely scoped but no longer is, or vice versa.
+//  2. The list of used directives has changed or any of those directives have had their public
+//     API changed. If the used directives have been reordered but not otherwise affected then
+//     the component must still be re-emitted, as this may affect directive instantiation order.
+//  3. The list of used pipes has changed, or any of those pipes have had their public API
+//     changed.","return (
+      this.isRemotelyScoped !== previousSymbol.isRemotelyScoped ||
+      !isArrayEqual(this.usedDirectives, previousSymbol.usedDirectives, isSymbolUnaffected) ||
+      !isArrayEqual(this.usedPipes, previousSymbol.usedPipes, isSymbolUnaffected)
+    );"
+ts,TypeScript,block,1,/*type*/,"undefined ,"
+ts,angular,block,2,"// because AppComponent itself is not a routed component
+// so we access it via the snapshot",const activatedRoute = getActivatedRouteSnapshotFromRouter(this.router);
+ts,TypeScript,singleton,1,"// If we are not visiting all of the original nodes, we must always create a new array.",updated = [];
+ts,vscode,block,6,"/**
+		 * Create a diagnostics collection.
+		 *
+		 * @param name The {@link DiagnosticCollection.name name} of the collection.
+		 * @returns A new diagnostic collection.
+		 */",export function createDiagnosticCollection(name?: string): DiagnosticCollection;
+ts,n8n,block,3,"// If the operation doesn't have a version defined, it should be
+// available for all versions. Otherwise, make sure the node type
+// version matches the operation version",const operationVersions = operation.displayOptions?.show?.['@version'];
+ts,vscode,singleton,1,// this and previous child are text -> merge them,(<Text>this._children[this._children.length - 1]).value += child.value;
+ts,vscode,singleton,1,"// If we narrow down, we might be able to reuse the cached results","if (searchValue.startsWith(previousSearch)) {
+				if (hasPathSep && previousSearch.indexOf(sep) < 0 && previousSearch !== '') {
+					continue; // since a path character widens the search for potential more matches, require it in previous search too
+				}
+
+				const row = cache.resultsToSearchCache[previousSearch];
+				cachedRow = {
+					promise: this.preventCancellation(row.promise),
+					event: row.event,
+					resolved: row.resolved
+				};
+				break;
+			}"
+ts,vscode,singleton,1,// Deduplicate same decorations so colors do not stack #109045,"return distinct(decorations, d => `${d.options.className} ${d.options.glyphMarginClassName} ${d.range.startLineNumber} ${d.range.startColumn}`);"
+ts,vscode,singleton,1,// auto magically triggered,"if (this._actionWidgetService.isVisible) {
+				// TODO: Figure out if we should update the showing menu?
+				actions.dispose();
+			} else {
+				this._activeCodeActions.value = actions;
+			}"
+ts,TypeScript,block,1,/** @internal */,"export function getJSXRuntimeImport(base: string | undefined, options: CompilerOptions): string | undefined {
+    return base ? `${base}/${options.jsx === JsxEmit.ReactJSXDev ? ""jsx-dev-runtime"" : ""jsx-runtime""}` : undefined;
+}"
+ts,angular,block,1,/** allowPartialMigration */,"false ,"
+ts,TypeScript,block,8,"//      _a = {
+//          a: 1
+//      };
+//  .yield resumeLabel
+//  .mark resumeLabel
+//      o = (_a.b = %sent%,
+//          _a.c = 2,
+//          _a);",const properties = node.properties;
+ts,TypeScript,inline,1,/*arity*/,","
+ts,TypeScript,block,3,"// We are adding a tabstop (i.e. `$0`) in the body of the suggested member,
+// if it has one, so that the cursor ends up in the body once the completion is inserted.
+// Note: this assumes we won't have more than one body in the completion nodes, which should be the case.",const emptyStmt = factory.createEmptyStatement();
+ts,n8n,singleton,1,// Poll every 60 seconds a list of upcoming executions,"this.mainTimer = setInterval(() => {
+			void this.getWaitingExecutions();
+		}, 60000);"
+ts,vscode,singleton,1,// Allow on close if it's the last window on Windows or Linux,"if (reason === ShutdownReason.CLOSE && (this._shutdownWindowCount === 1 && !isMacintosh)) {
+					return true;
+				}"
+ts,core,singleton,1,// check if name is dynamic.,let staticSlotName: string | undefined
+ts,angular,block,2,"// If there is a record, reduce the usage count and if no longer used,
+// remove from DOM and delete usage record.","if (record) {
+      record.usage--;
+      if (record.usage <= 0) {
+        removeElements(record.elements);
+        usages.delete(value);
+      }
+    }"
+ts,vscode,inline,1,// reduce flicker by showing later,","
+ts,TypeScript,singleton,1,"// import a = e.x; in module augmentation is ok, but not import a = require('fs)",if (isInternalModuleImportEqualsDeclaration(node)) break;
+ts,TypeScript,block,15,"// --------------------<----------------------------------------------<------------------------------<-------------------||----------------------------
+// dist/haha.d.ts      <- dist/haha, dist/haha.js                     <- ""@app/*"": [""./dist/*.d.ts""] <- @app/haha        || (none)
+// dist/haha.d.ts      <- dist/haha, dist/haha.js                     <- ""@app/*"": [""./dist/*""]      <- (none)           || @app/haha, @app/haha.js
+// dist/foo/index.d.ts <- dist/foo, dist/foo/index, dist/foo/index.js <- ""@app/*"": [""./dist/*.d.ts""] <- @app/foo/index   || (none)
+// dist/foo/index.d.ts <- dist/foo, dist/foo/index, dist/foo/index.js <- ""@app/*"": [""./dist/*""]      <- (none)           || @app/foo, @app/foo/index, @app/foo/index.js
+// dist/wow.js.js      <- dist/wow.js, dist/wow.js.js                 <- ""@app/*"": [""./dist/*.js""]   <- @app/wow.js      || @app/wow, @app/wow.js
+//
+// The ""Filename Result"" can be generated only if `pattern` has an extension. Care must be taken that the list of
+// relative module specifiers to run the interpolation (a) is actually valid for the module resolution mode, (b) takes
+// into account the existence of other files (e.g. 'dist/wow.js' cannot refer to 'dist/wow.js.js' if 'dist/wow.js'
+// exists) and (c) that they are ordered by preference. The last row shows that the filename result and module
+// specifier results are not mutually exclusive. Note that the filename result is a higher priority in module
+// resolution, but as long criteria (b) above is met, I don't think its result needs to be the highest priority result
+// in module specifier generation. I have included it last, as it's difficult to tell exactly where it should be
+// sorted among the others for a particular value of `importModuleSpecifierEnding`.","const candidates: { ending: ModuleSpecifierEnding | undefined; value: string; }[] = allowedEndings.map(ending => ({
+                ending,
+                value: processEnding(relativeToBaseUrl, [ending], compilerOptions),
+            }));"
+ts,n8n,singleton,1,//https://docs.microsoft.com/en-us/graph/api/todotasklist-get?view=graph-rest-1.0&tabs=http,}
+ts,angular,inline,1,/* capture= */,","
+ts,vscode,block,1,/** @description documentsWithPromises */,let original: IReference<IResolvedTextEditorModel> | undefined;
+ts,vscode,singleton,1,"// with the command center enabled, we should always show","if (configurationService.getValue<boolean>(LayoutSettings.COMMAND_CENTER)) {
+		return false;
+	}"
+ts,n8n,singleton,1,// https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html,"if (operation === 'delete') {
+						const name = this.getNodeParameter('name', i) as string;
+
+						responseData = await awsApiRequestSOAP.call(
+							this,
+							`${name}.s3`,
+							'DELETE',
+							'',
+							'',
+							{},
+							headers,
+						);
+						const executionData = this.helpers.constructExecutionMetaData(
+							this.helpers.returnJsonArray({ success: true }),
+							{ itemData: { item: i } },
+						);
+						returnData.push(...executionData);
+					}"
+ts,angular,block,4,"// DELETE: oldKey key is missing or we did not find the oldKey in the newValue
+// (because the keyValueArray is sorted and `newKey` is found later alphabetically).
+// `""background"" < ""color""` so we need to delete `""background""` because it is not found in the
+// new array.",oldIndex += 2;
+ts,n8n,singleton,1,//https://developer.infusionsoft.com/docs/rest/#!/Product/listProductsUsingGET,"if (operation === 'getAll') {
+					const returnAll = this.getNodeParameter('returnAll', i);
+					const filters = this.getNodeParameter('filters', i);
+					keysToSnakeCase(filters);
+					Object.assign(qs, filters);
+					if (returnAll) {
+						responseData = await keapApiRequestAllItems.call(
+							this,
+							'products',
+							'GET',
+							'/products',
+							{},
+							qs,
+						);
+					} else {
+						qs.limit = this.getNodeParameter('limit', i);
+						responseData = await keapApiRequest.call(this, 'GET', '/products', {}, qs);
+						responseData = responseData.products;
+					}
+				}"
+ts,TypeScript,inline,1,/*allowSourceMaps*/,","
+ts,vscode,singleton,1,// check if the port is a valid integer value,const portMatch = match.match(UrlFinder.extractPortRegex);
+ts,n8n,block,3,"// ----------------------------------
+//         deal:update
+// ----------------------------------",requestMethod = 'PUT';
+ts,angular,singleton,1,// Every iteration of the loop requires that we go to the declared parent.,declarationViewOffset++;
+ts,vite,block,4,"// This will trigger incorrectly if `export default` is contained
+// anywhere in a string. Svelte and Astro files can't have
+// `export default` as code so we know if it's encountered it's a
+// false positive (e.g. contained in a string)","if (!p.endsWith('.vue') || !js.includes('export default')) {
+          js += '\nexport default {}'
+        }"
+ts,n8n,block,2,"// Check if any of the parent nodes does not have any inputs. That
+// would mean that it has to get added to the list of nodes to process.","const parentNodes = workflow.getParentNodes(
+							inputData.node,
+							NodeConnectionTypes.Main,
+							-1,
+						);"
+ts,angular,singleton,1,"// Find the index of first attribute that has no value, only a name.",const nameOnlyMarkerIdx = nodeAttrs !== null ? getNameOnlyMarkerIndex(nodeAttrs) : 0;
+ts,TypeScript,inline,1,/*onKey*/,(
+ts,vscode,block,2,"// so that users don't have to wait for the hover to load
+// just to click into the one override there is.",this.scopeOverridesIndicator.element.style.display = 'inline';
