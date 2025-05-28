@@ -1,0 +1,7 @@
+# Figures
+
+* [Scatterplot of characters vs length of a method](./chars_len_scatter.pdf): Demonstrates how Length explains the number of Characters in a method as a feature.
+* [Boxplot of Cliff's Delta values at different lengths](./cliffs_boxplot_swarm.pdf): Each dot is a Cliff's Delta value between comment methods and non-comment methods on a metric, fixed for only methods at a certain length (i.e. only methods with 10 lines-of-code). This is displayed for each language and metric under study. A higher value means a larger effect size and that generally the comment methods were higher in the metric than the non-comment methods.
+* [Length histogram](./length_histogram.pdf): Shows the count of comment and non-comment methods at different lengths. Per-language and overall.
+* [Percent of NonCommentMethods at different lengths](./percent-by-loc.pdf): The percent of methods that do not have a comment (NonCommentMethods) at each length. Per-language. This may be used to choose a comprehensibility-informed length threshold to use as a static analysis rule for a project.
+* [Comment proportion by repo](./repo_comment_proportions.pdf): Repository-specific breakdown of the previous graph, with the 50% comment ratio point marked. Some repositories do not ever pass this threshold (they have very few commented methods) and some already have a length limit, which is why their graphs appear cut off. For a breakdown of what different limits may look like for different % thresholds, see [repo_decision_points.csv](../data/repo_decision_points.csv).
