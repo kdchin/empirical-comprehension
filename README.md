@@ -1,4 +1,4 @@
-# Supplemental Materials for Code Comprehension: Where Did We Go Wrong?
+# Supplemental Materials for 'Put The "Code" Back In "Code Comprehension Study"'
 
 This repository contains the supplemental materials for our ASE '25 submission.
 See [repos.txt](./repos.txt) for a list of repositories examined and [comment_data.txt](./comment_data.txt) for a breakdown of comment usage by repository and language. The comments we sampled to check for junk comments is in [sampled_comments_per_lang.csv](./data/sampled_comments_per_lang.csv).
