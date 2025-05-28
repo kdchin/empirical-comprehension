@@ -1,0 +1,71 @@
+# % of Methods That Have a Comment By Language
+Lang    % CommentMethods
+py      53.484113
+cpp     40.059301
+java    38.128473
+rs      37.792761
+ts      35.301421
+
+
+# % of Methods That Have a Comment by Repo
+Repo               % CommentMethods
+tesseract          84.168704
+ignite             82.799573
+scikit-learn       66.731581
+uv                 66.708582
+ansible            65.171849
+core               63.982888
+imgui              60.058480
+TypeScript         59.618794
+terminal           57.142857
+alacritty          55.771725
+django             53.480832
+angular            53.360560
+transformers       52.485128
+stablediffusion    48.905109
+sway               46.982759
+vite               46.643110
+rust               46.077901
+tensorflow         45.454717
+bitcoin            41.780448
+spark              41.766784
+tauri              40.184332
+beam               39.609664
+hadoop             38.699959
+grpc               38.269057
+puppeteer          36.846543
+kafka              36.750258
+n8n                36.338619
+hoppscotch         34.818942
+opencv             34.166394
+electron           34.025904
+keras              33.139253
+godot              32.651281
+elasticsearch      30.890854
+x64dbg             29.540301
+vscode             28.571812
+ComfyUI            28.514056
+react-native       28.137490
+deno               27.018241
+localstack         26.291253
+zeppelin           26.131953
+union              26.125804
+fuel-core          26.034666
+rustdesk           24.409764
+dubbo              23.748134
+cassandra          23.032623
+zed                20.542282
+spring-boot        18.670848
+nest               16.677524
+tabby              16.088328
+fastapi            12.784810
+
+
+# Breakdown of Type of Comment By Language
+type:	block	docstring	inline	singleton
+ext				
+cpp	31.550505	10.458576	16.295235	41.695685
+java	14.037510	49.245883	4.516955	32.199652
+py	15.562119	36.930120	6.869466	40.638295
+rs	32.950276	27.058347	2.278987	37.712390
+ts	33.809824	10.937194	10.956747	44.296235
